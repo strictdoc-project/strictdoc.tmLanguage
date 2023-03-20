@@ -1,0 +1,316 @@
+{
+	"comment": "StrictDoc Syntax: version 1.0",
+	"fileTypes": [
+		"sdoc"
+	],
+	"firstLineMatch": "^\\[DOCUMENT\\]$",
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "StrictDoc",
+	"patterns": [
+		{
+			"include": "#document"
+		},
+		{
+			"include": "#grammar"
+		},
+		{
+			"include": "#section"
+		},
+		{
+			"include": "#requirement"
+		},
+		{
+			"include": "#freetext"
+		},
+		{
+			"include": "#keywords"
+		}
+	],
+	"repository": {
+		"grammar_field_title": {
+			"patterns": [{
+				"name": "",
+				"begin": "(^\\s\\s-\\sTITLE:)\\s",
+				"end": "$",
+				"beginCaptures": {
+					"1": { "name": "keyword.sdoc" }
+				},
+				"patterns": [{
+					"name": "keyword.control.sdoc",
+					"match": "\\b(UID|REFS|TITLE|STATEMENT|RATIONALE|COMMENT)\\b"
+				}]
+			}]
+		},
+		"grammar_field_type": {
+			"patterns": [{
+				"name": "",
+				"begin": "(^\\s\\s\\s\\sTYPE:)\\s",
+				"end": "$",
+				"beginCaptures": {
+					"0": { "name": "keyword.sdoc" }
+				},
+				"patterns": [
+					{
+						"name": "constant.numeric.sdoc",
+						"match": "\\b(String|Tag|SingleChoice\\(|MultipleChoice\\(|Reference\\()\\b"
+					},
+					{
+						"include": "#grammar_field_reference_choice"
+					}
+				]
+			}]
+		},
+		"grammar_field_required": {
+			"patterns": [{
+				"name": "",
+				"begin": "(^\\s\\s\\s\\sREQUIRED:)\\s",
+				"end": "$",
+				"beginCaptures": {
+					"1": { "name": "keyword.sdoc" }
+				},
+				"patterns": [
+					{
+						"include": "#choice_boolean"
+					}
+				]
+			}]
+		},
+		"grammar_field_reference_choice": {
+			"patterns": [{
+				"name": "constant.character.sdoc",
+				"match": "\\b(ParentReqReference|FileReference|BibReference)\\b"
+			}]
+		},
+		"document_field_name": {
+			"patterns": [{
+				"name": "keyword.control.sdoc",
+				"match": "^\\b(TITLE|UID|VERSION|CLASSIFICATION)\\b:"
+			}]
+		},
+		"document_options": {
+			"patterns": [{
+				"begin": "^OPTIONS:$",
+				"name": "",
+				"end": "^$",
+				"beginCaptures": {
+					"0": { "name": "keyword.control.sdoc" }
+				},
+				"patterns": [
+					{
+						"include": "#document_options_markup"
+					},
+					{
+						"include": "#document_options_auto_levels"
+					},
+					{
+						"include": "#document_options_requirement_style"
+					},
+					{
+						"include": "#document_options_requirement_in_toc"
+					}
+				]
+			}]
+		},
+		"document_options_markup": {
+			"patterns": [{
+				"name": "constant.numeric.sdoc",
+				"match": "(^\\s\\sMARKUP:)\\s\\b(RST|Text|HTML)\\b$",
+				"captures": {
+					"1": { "name": "keyword.control.sdoc" },
+					"2": { "name": "constant.character.sdoc" }
+				}
+			}]
+		},
+		"document_options_requirement_style": {
+			"patterns": [{
+				"name": "constant.numeric.sdoc",
+				"match": "(^\\s\\sREQUIREMENT_STYLE:)\\s\\b(Inline|Simple|Table|Zebra)\\b$",
+				"captures": {
+					"1": { "name": "keyword.control.sdoc" },
+					"2": { "name": "constant.character.sdoc" }
+				}
+			}]
+		},
+		"document_options_requirement_in_toc": {
+			"patterns": [{
+				"name": "constant.numeric.sdoc",
+				"begin": "(^\\s\\sREQUIREMENT_IN_TOC:)",
+				"end": "$",
+				"beginCaptures": {
+					"0": { "name": "keyword.control.sdoc" }
+				},
+				"patterns": [
+					{
+						"include": "#choice_boolean"
+					}
+				]
+			}]
+		},
+		"document_options_auto_levels": {
+			"patterns": [{
+				"name": "constant.numeric.sdoc",
+				"begin": "(^\\s\\sAUTO_LEVELS:)",
+				"end": "$",
+				"beginCaptures": {
+					"0": { "name": "keyword.control.sdoc" }
+				},
+				"patterns": [
+					{
+						"include": "#choice_enable"
+					}
+				]
+			}]
+		},
+		"document": {
+			"patterns": [{
+				"begin": "(?<!\\.)^\\[DOCUMENT\\]$",
+				"name": "",
+				"end": "^$",
+				"beginCaptures": {
+					"0": { "name": "keyword.sdoc" }
+				},
+				"patterns": [
+					{
+						"include": "#document_field_name"
+					},
+					{
+						"include": "#document_options"
+					}
+				]
+			}]
+		},
+		"grammar": {
+			"patterns": [{
+				"begin": "^\\[\\b(GRAMMAR)\\b\\]$",
+				"name": "emphasis.sdoc",
+				"end": "^$",
+				"beginCaptures": {
+					"0": { "name": "keyword.sdoc" }
+				},
+				"patterns": [
+					{
+						"match": "^ELEMENTS:",
+						"name": "keyword.sdoc"
+					},
+					{
+						"match": "^(-|\\s)\\s(TAG|FIELDS):",
+						"name": "keyword.sdoc"
+					},
+					{
+						"include": "#grammar_field_title"
+					},
+					{
+						"include": "#grammar_field_type"
+					},
+					{
+						"include": "#grammar_field_required"
+					}
+				]
+			}]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "invalid.illegal.sdoc",
+					"match": "\\[\\/(REQUIREMENT|GRAMMAR|DOCUMENT)\\]"
+				},
+				{
+					"name": "keyword.sdoc",
+					"match": "^\\[\\/?SECTION\\]$"
+				}
+			]
+		},
+		"section": {
+			"begin": "^\\[SECTION\\]$",
+			"end": "^$",
+			"patterns": [
+				{
+					"name": "keyword.control.sdoc",
+					"match": "^(UID|TITLE):\\s"
+				}
+			],
+			"captures": {
+				"0": {
+					"name": "keyword.sdoc"
+				}
+			}
+		},
+		"requirement_fields": {
+			"patterns": [{
+				"match": "^(UID|REFS|TITLE|STATEMENT|RATIONALE|COMMENT):\\s",
+				"name": "keyword.control.sdoc"
+			}]
+		},
+		"requirement_field_params": {
+			"patterns": [{
+				"match": "^(-\\sTYPE|\\s\\sVALUE):\\s",
+				"name": "keyword.other.sdoc"
+			}]
+		},
+		"requirement": {
+			"begin": "^\\[REQUIREMENT\\]$",
+			"end": "^$",
+			"patterns": [
+				{
+					"include": "#field_rst_value"
+				},
+				{
+					"include": "#requirement_fields"
+				},
+				{
+					"include": "#requirement_field_params"
+				}
+			],
+			"captures": {
+				"0": {
+					"name": "keyword.sdoc"
+				}
+			}
+		},
+		"freetext": {
+			"begin": "^\\[FREETEXT\\]$",
+			"end": "^\\[\\/FREETEXT\\]$",
+			"contentName": "source.rst",
+			"patterns": [
+				{
+					"comment": "FIXME: See 'The problem of leaking incorrect RST markup'.",
+					"include": "source.rst"
+				}
+			],
+			"captures": {
+				"0": {
+					"name": "keyword.sdoc"
+				}
+			}
+		},
+		"field_rst_value": {
+			"begin": ">>>$",
+			"end": "^<<<$",
+			"contentName": "source.rst",
+			"patterns": [
+				{
+					"comment": "FIXME: # 'The problem of leaking incorrect RST markup'. An invalid included RST markup breaks further markup of the file by exceeding the scope and eating at least one end-of-scope marker. In the file tmLanguage (plist) in the program TextMate it was possible to capture the scope with RST content more clearly, and the RST text does not leak to the limits of the scope. Using this method in this file does not work.",
+					"include": "source.rst"
+				}
+			],
+			"captures": {
+				"0": {
+					"name": "string.quoted.double.sdoc"
+				}
+			}
+		},
+		"choice_boolean": {
+			"patterns": [{
+				"name": "constant.language.sdoc",
+				"match": "\\b(True|False)\\b"
+			}]
+		},
+		"choice_enable": {
+			"patterns": [{
+				"name": "constant.language.sdoc",
+				"match": "\\b(On|Off)\\b"
+			}]
+		}
+	},
+	"scopeName": "source.sdoc"
+}

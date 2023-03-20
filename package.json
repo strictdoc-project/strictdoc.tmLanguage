@@ -1,0 +1,34 @@
+{
+  "name": "strictdoc",
+  "displayName": "StrictDoc Language Basics",
+  "description": "Support for the StrictDoc markup: https://github.com/strictdoc-project/",
+  "license": "MIT",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "sdoc",
+        "extensions": [
+          ".sdoc"
+        ],
+        "aliases": [
+          "StrictDoc",
+          "sdoc"
+        ],
+        "firstLine": "^\\[DOCUMENT\\]$",
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [{
+      "language": "sdoc",
+      "scopeName": "source.sdoc",
+      "path": "./syntaxes/sdoc.tmLanguage.json"
+    }]
+  }
+}
