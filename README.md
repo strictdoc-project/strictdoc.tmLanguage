@@ -9,9 +9,33 @@ highlighting for the StrictDoc markup language.
 
 ## Demos
 
+### Visual Studio Code
+
+![](assets/VSCode/Screenshot_VSCode_1.png)
+
 ### PyCharm
 
 ![](assets/PyCharm/Screenshot_PyCharm_1.png)
+
+## Installing in Visual Studio Code
+
+Clone this repository to a good place under your file system:
+
+```bash
+git clone git@github.com:strictdoc-project/strictdoc.tmLanguage.git
+```
+
+Copy the cloned folder as-is to your user's VS Code extensions folder:
+
+```bash
+cp -rv strictdoc.tmLanguage $HOME/.vscode/extensions/
+```
+
+This instruction has been tested to work correctly and is taken from:
+[Create Custom Language in Visual Studio Code](https://stackoverflow.com/q/30687783/598057).
+
+The syntax highlighting should become activated right away, but you may need
+to reload the editor / reopen the currently open tab with an `.sdoc` file.
 
 ## Installing in PyCharm
 
