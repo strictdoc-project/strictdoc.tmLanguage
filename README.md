@@ -17,7 +17,16 @@ highlighting for the StrictDoc markup language.
 
 ![](assets/PyCharm/Screenshot_PyCharm_1.png)
 
-## Installing in Visual Studio Code
+## Installing in Visual Studio Code (Visual Studio Marketplace)
+
+The best way to get this extension up and running in Visual Studio Code
+is to install it directly from the Marketplace:
+[StrictDoc Language Basics Extension](https://marketplace.visualstudio.com/items?itemName=StrictDoc.strictdoc).
+
+## Installing in Visual Studio Code (local installation)
+
+It is also possible to install this extension manually by cloning this
+repository.
 
 Clone this repository to a good place under your file system:
 
