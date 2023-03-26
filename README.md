@@ -17,6 +17,10 @@ highlighting for the StrictDoc markup language.
 
 ![](assets/PyCharm/Screenshot_PyCharm_1.png)
 
+### Eclipse
+
+![](assets/Eclipse/Screenshot_Eclipse_1.png)
+
 ## Installing in Visual Studio Code (Visual Studio Marketplace)
 
 The best way to get this extension up and running in Visual Studio Code
@@ -66,3 +70,116 @@ of the list but then goes up when you open the `TextMate Bundles` next time.
 
 When the settings are saved via `Apply` or `OK`, the syntax of all
 open `.sdoc` files should become highlighted right away.
+
+## Installing in Eclipse
+
+The Eclipse IDE for C/C++ Developers, version 2023-03 (4.27.0), was used to test
+the steps of this tutorial. The syntax highlighting is expected to work in any
+Eclipse-based IDE, as long as that IDE has the integrated
+[TextMate support in Eclipse IDE (TM4E)](https://github.com/eclipse/tm4e>).
+
+The steps are as follows.
+
+### Create test files
+
+In Eclipse, in your workspace, create two test files:
+`test.rst` and `test.sdoc`. These files should help in testing
+that both RST and SDoc markup work. Add some RST and SDoc content to these
+files, for example:
+
+```rst
+Testing RST
+===========
+
+This is **a line** of RST.
+```
+
+```text
+[DOCUMENT]
+TITLE: Development Plan
+OPTIONS:
+  REQUIREMENT_STYLE: Table
+  REQUIREMENT_IN_TOC: True
+
+[FREETEXT]
+Here, the RST markup shall be **recognized**.
+[/FREETEXT]
+
+[REQUIREMENT]
+UID: GOAL-1-TOOL-SUPPORT
+TITLE: Software support for writing requirements and specifications documents
+STATEMENT: >>>
+Here, the RST markup shall be **recognized**.
+<<<
+```
+
+### Register .sdoc and .rst extensions
+
+Go to `Eclipse / Preferences...` (`Command` + `,`). Open
+`General / Content Types`. For the `Text` content type, add `*.sdoc` and `*.rst`
+associations.
+
+![](assets/Eclipse/Screenshot_Eclipse_2.png)
+
+Notes:
+
+1) It should be possible to create a `Text/StrictDoc` subcategory but the
+basic combination shown on the screenshot is known to work.
+
+### Register the RST syntax
+
+If your Eclipse installation already has the RST syntax registered, you
+don't need to register the `*.rst` extension, and this step can be skipped.
+
+Eclipse TextMate grammar files are maintained in JSON format in the
+[tm4e/org.eclipse.tm4e.language_pack](https://github.com/eclipse/tm4e/tree/main/org.eclipse.tm4e.language_pack)
+folder.
+
+Download the `rst.tmLanguage.json` file from GitHub:
+
+![](assets/Eclipse/Screenshot_Eclipse_3.png)
+
+Open `Eclipse / TextMate / Grammar`, and add the RST grammar like is shown on
+the screenshots:
+
+![](assets/Eclipse/Screenshot_Eclipse_4.png)
+![](assets/Eclipse/Screenshot_Eclipse_5.png)
+![](assets/Eclipse/Screenshot_Eclipse_6.png)
+
+Click "Apply and Close" and open your `test.rst` file using the
+`Generic Text Editor`:
+
+![](assets/Eclipse/Screenshot_Eclipse_7.png)
+
+When the text editor tab is opened, your RST syntax should be highlighted:
+
+![](assets/Eclipse/Screenshot_Eclipse_8.png)
+
+### Register the SDoc syntax
+
+Clone this repository to a good place under your file system:
+
+```bash
+git clone git@github.com:strictdoc-project/strictdoc.tmLanguage.git
+```
+
+In the cloned `strictdoc.tmLanguage` folder, there is a file called
+`syntaxes/sdoc.tmLanguage.json`. Open that file and replace all occurrences of
+`source.rst` with `lngpck.source.rst`. This is needed because TM4E language
+repository maintains all its .json language files under the `lngpck.*`
+namespace. Changing to `lngpck.source.rst` helps the StrictDoc grammar to
+properly locate the RST grammar in Eclipse.
+
+Follow the same steps as for RST above: import the `sdoc.tmLanguage.json` file.
+The expected result:
+
+![](assets/Eclipse/Screenshot_Eclipse_9.png)
+![](assets/Eclipse/Screenshot_Eclipse_10.png)
+
+Now, open the `test.sdoc` file using the `Generic Text Editor`.
+
+![](assets/Eclipse/Screenshot_Eclipse_11.png)
+
+You should see the SDoc syntax highlighted:
+
+![](assets/Eclipse/Screenshot_Eclipse_12.png)
