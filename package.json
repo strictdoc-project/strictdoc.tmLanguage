@@ -1,7 +1,7 @@
 {
   "name": "strictdoc",
   "displayName": "StrictDoc Language Basics",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "StrictDoc",
   "description": "Support for the StrictDoc markup: https://github.com/strictdoc-project/",
   "homepage": "https://github.com/strictdoc-project/strictdoc.tmLanguage",
@@ -14,7 +14,10 @@
     "Programming Languages",
     "Language Packs"
   ],
-  "repository": "git@github.com:strictdoc-project/strictdoc.tmLanguage.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/strictdoc-project/strictdoc.tmLanguage.git"
+  },
   "contributes": {
     "languages": [
       {
