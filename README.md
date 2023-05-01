@@ -71,6 +71,12 @@ of the list but then goes up when you open the `TextMate Bundles` next time.
 When the settings are saved via `Apply` or `OK`, the syntax of all
 open `.sdoc` files should become highlighted right away.
 
+**Important:** When an SDoc file is opened for the first time, PyCharm
+may attempt to associate the `.sdoc` extension with a Text file type.
+Make you sure that the StrictDoc extension (`.sdoc`) is NOT registered
+in `Editor / File types`. In particular, `.sdoc` shall not appear under `Text`
+file type patterns, otherwise, the syntax highlighting for SDoc may not work.
+
 ## Installing in Eclipse
 
 The Eclipse IDE for C/C++ Developers, version 2023-03 (4.27.0), was used to test
