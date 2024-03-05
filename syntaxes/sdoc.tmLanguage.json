@@ -20,6 +20,9 @@
 			"include": "#requirement"
 		},
 		{
+			"include": "#composite_requirement"
+		},
+		{
 			"include": "#freetext"
 		},
 		{
@@ -84,7 +87,22 @@
 		"document_field_name": {
 			"patterns": [{
 				"name": "keyword.control.sdoc",
-				"match": "^\\b(TITLE|UID|VERSION|CLASSIFICATION)\\b:"
+				"match": "^\\b(MID|TITLE|UID|VERSION|CLASSIFICATION|REQ_PREFIX)\\b:"
+			}]
+		},
+		"document_root": {
+			"patterns": [{
+				"name": "constant.numeric.sdoc",
+				"begin": "(^ROOT:)",
+				"end": "$",
+				"beginCaptures": {
+					"0": { "name": "keyword.control.sdoc" }
+				},
+				"patterns": [
+					{
+						"include": "#choice_boolean"
+					}
+				]
 			}]
 		},
 		"document_options": {
@@ -97,6 +115,9 @@
 				},
 				"patterns": [
 					{
+						"include": "#document_options_mid"
+					},
+					{
 						"include": "#document_options_markup"
 					},
 					{
@@ -107,6 +128,21 @@
 					},
 					{
 						"include": "#document_options_requirement_in_toc"
+					}
+				]
+			}]
+		},
+		"document_options_mid": {
+			"patterns": [{
+				"name": "constant.numeric.sdoc",
+				"begin": "(^\\s\\sENABLE_MID:)",
+				"end": "$",
+				"beginCaptures": {
+					"0": { "name": "keyword.control.sdoc" }
+				},
+				"patterns": [
+					{
+						"include": "#choice_boolean"
 					}
 				]
 			}]
@@ -174,6 +210,9 @@
 						"include": "#document_field_name"
 					},
 					{
+						"include": "#document_root"
+					},
+					{
 						"include": "#document_options"
 					}
 				]
@@ -217,6 +256,10 @@
 				{
 					"name": "keyword.sdoc",
 					"match": "^\\[\\/?SECTION\\]$"
+				},
+				{
+					"name": "keyword.sdoc",
+					"match": "^\\[\\/?COMPOSITE_REQUIREMENT\\]$"
 				}
 			]
 		},
@@ -226,7 +269,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.sdoc",
-					"match": "^(UID|TITLE):\\s"
+					"match": "^(MID|UID|LEVEL|TITLE|REQ_PREFIX):\\s"
 				}
 			],
 			"captures": {
@@ -237,7 +280,7 @@
 		},
 		"requirement_fields": {
 			"patterns": [{
-				"match": "^(UID|REFS|TITLE|STATEMENT|RATIONALE|COMMENT):\\s",
+				"match": "^(MID|UID|LEVEL|STATUS|TAGS|TITLE|STATEMENT|RATIONALE|COMMENT|RELATIONS):\\s",
 				"name": "keyword.control.sdoc"
 			}]
 		},
@@ -249,6 +292,26 @@
 		},
 		"requirement": {
 			"begin": "^\\[REQUIREMENT\\]$",
+			"end": "^$",
+			"patterns": [
+				{
+					"include": "#field_rst_value"
+				},
+				{
+					"include": "#requirement_fields"
+				},
+				{
+					"include": "#requirement_field_params"
+				}
+			],
+			"captures": {
+				"0": {
+					"name": "keyword.sdoc"
+				}
+			}
+		},
+		"composite_requirement": {
+			"begin": "^\\[COMPOSITE_REQUIREMENT\\]$",
 			"end": "^$",
 			"patterns": [
 				{
