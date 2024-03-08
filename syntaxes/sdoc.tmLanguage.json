@@ -20,9 +20,6 @@
 			"include": "#requirement"
 		},
 		{
-			"include": "#composite_requirement"
-		},
-		{
 			"include": "#freetext"
 		},
 		{
@@ -343,27 +340,7 @@
 			}]
 		},
 		"requirement": {
-			"begin": "^\\[REQUIREMENT\\]$",
-			"end": "^$",
-			"patterns": [
-				{
-					"include": "#field_rst_value"
-				},
-				{
-					"include": "#requirement_fields"
-				},
-				{
-					"include": "#requirement_relations_params"
-				}
-			],
-			"captures": {
-				"0": {
-					"name": "keyword.sdoc"
-				}
-			}
-		},
-		"composite_requirement": {
-			"begin": "^\\[COMPOSITE_REQUIREMENT\\]$",
+			"begin": "^\\[(COMPOSITE_)?REQUIREMENT\\]$",
 			"end": "^$",
 			"patterns": [
 				{
