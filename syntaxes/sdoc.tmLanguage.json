@@ -38,10 +38,20 @@
 				"beginCaptures": {
 					"1": { "name": "keyword.sdoc" }
 				},
-				"patterns": [{
-					"name": "keyword.control.sdoc",
-					"match": "\\b(UID|REFS|TITLE|STATEMENT|RATIONALE|COMMENT)\\b"
-				}]
+				"patterns": [
+					{
+						"name": "keyword.control.sdoc",
+						"match": "\\b(UID|MID|VERSION|LEVEL|STATUS|TAGS|VERIFICATION|TITLE|STATEMENT|RATIONALE|COMMENT)\\b"
+					},
+					{
+						"name": "invalid.deprecated.sdoc",
+						"match": "\\b(REFS)\\b"
+					},
+					{
+						"match": "\\b([A-Z]+)\\b",
+						"name": "markup.changed"
+					}
+				]
 			}]
 		},
 		"grammar_field_type": {
@@ -61,6 +71,32 @@
 						"include": "#grammar_field_reference_choice"
 					}
 				]
+			}]
+		},
+		"grammar_relation_type": {
+			"patterns": [{
+				"name": "",
+				"begin": "(^\\s\\s(-|\\s)\\sTYPE:)\\s",
+				"end": "$",
+				"beginCaptures": {
+					"0": { "name": "keyword.sdoc" }
+				},
+				"patterns": [
+					{
+						"name": "constant.numeric.sdoc",
+						"match": "\\b(Parent|Child|File)\\b"
+					}
+				]
+			}]
+		},
+		"grammar_relation_role": {
+			"patterns": [{
+				"name": "",
+				"begin": "(^\\s\\s\\s\\sROLE:)\\s",
+				"end": "$",
+				"beginCaptures": {
+					"0": { "name": "keyword.sdoc" }
+				}
 			}]
 		},
 		"grammar_field_required": {
@@ -232,7 +268,7 @@
 						"name": "keyword.sdoc"
 					},
 					{
-						"match": "^(-|\\s)\\s(TAG|FIELDS):",
+						"match": "^(-|\\s)\\s(TAG|FIELDS|RELATIONS):",
 						"name": "keyword.sdoc"
 					},
 					{
@@ -243,6 +279,12 @@
 					},
 					{
 						"include": "#grammar_field_required"
+					},
+					{
+						"include": "#grammar_relation_type"
+					},
+					{
+						"include": "#grammar_relation_role"
 					}
 				]
 			}]
@@ -279,10 +321,20 @@
 			}
 		},
 		"requirement_fields": {
-			"patterns": [{
-				"match": "^(MID|UID|LEVEL|STATUS|TAGS|TITLE|STATEMENT|RATIONALE|COMMENT|RELATIONS):\\s",
-				"name": "keyword.control.sdoc"
-			}]
+			"patterns": [
+				{
+					"match": "^(MID|UID|LEVEL|STATUS|TAGS|TITLE|STATEMENT|RATIONALE|COMMENT|RELATIONS):\\s",
+					"name": "keyword.control.sdoc"
+				},
+				{
+					"match": "^(REFS):\\s",
+					"name": "invalid.deprecated.sdoc"
+				},
+				{
+					"match": "^([A-Z]+):\\s",
+					"name": "markup.changed"
+				}
+			]
 		},
 		"requirement_field_params": {
 			"patterns": [{
