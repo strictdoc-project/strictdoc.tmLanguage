@@ -336,9 +336,9 @@
 				}
 			]
 		},
-		"requirement_field_params": {
+		"requirement_relations_params": {
 			"patterns": [{
-				"match": "^(-\\sTYPE|\\s\\sVALUE):\\s",
+				"match": "^(-\\sTYPE|\\s\\sVALUE|\\s\\sROLE):\\s",
 				"name": "keyword.other.sdoc"
 			}]
 		},
@@ -353,7 +353,7 @@
 					"include": "#requirement_fields"
 				},
 				{
-					"include": "#requirement_field_params"
+					"include": "#requirement_relations_params"
 				}
 			],
 			"captures": {
@@ -373,7 +373,7 @@
 					"include": "#requirement_fields"
 				},
 				{
-					"include": "#requirement_field_params"
+					"include": "#requirement_relations_params"
 				}
 			],
 			"captures": {
