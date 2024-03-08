@@ -3,12 +3,15 @@
 	"fileTypes": [
 		"sdoc"
 	],
-	"firstLineMatch": "^\\[DOCUMENT\\]$",
+	"firstLineMatch": "^(\\[DOCUMENT\\]|\\[FRAGMENT\\])$",
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "StrictDoc",
 	"patterns": [
 		{
 			"include": "#document"
+		},
+		{
+			"include": "#fragment"
 		},
 		{
 			"include": "#grammar"
@@ -21,6 +24,9 @@
 		},
 		{
 			"include": "#freetext"
+		},
+		{
+			"include": "#fragment_from_file"
 		},
 		{
 			"include": "#keywords"
@@ -250,6 +256,42 @@
 					}
 				]
 			}]
+		},
+		"fragment": {
+			"patterns": [{
+				"begin": "(?<!\\.)^\\[FRAGMENT\\]$",
+				"name": "",
+				"end": "^$",
+				"beginCaptures": {
+					"0": { "name": "keyword.sdoc" }
+				},
+				"patterns": [
+					{
+						"include": "#document_field_name"
+					},
+					{
+						"include": "#document_root"
+					},
+					{
+						"include": "#document_options"
+					}
+				]
+			}]
+		},
+		"fragment_from_file": {
+			"begin": "^\\[FRAGMENT_FROM_FILE\\]$",
+			"end": "^$",
+			"patterns": [
+				{
+					"name": "keyword.control.sdoc",
+					"match": "^(FILE):\\s"
+				}
+			],
+			"captures": {
+				"0": {
+					"name": "keyword.sdoc"
+				}
+			}
 		},
 		"grammar": {
 			"patterns": [{
