@@ -3,12 +3,15 @@
 	"fileTypes": [
 		"sdoc"
 	],
-	"firstLineMatch": "^\\[DOCUMENT\\]$",
+	"firstLineMatch": "^(\\[DOCUMENT\\]|\\[FRAGMENT\\])$",
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "StrictDoc",
 	"patterns": [
 		{
 			"include": "#document"
+		},
+		{
+			"include": "#fragment"
 		},
 		{
 			"include": "#grammar"
@@ -20,10 +23,10 @@
 			"include": "#requirement"
 		},
 		{
-			"include": "#composite_requirement"
+			"include": "#freetext"
 		},
 		{
-			"include": "#freetext"
+			"include": "#fragment_from_file"
 		},
 		{
 			"include": "#keywords"
@@ -38,10 +41,20 @@
 				"beginCaptures": {
 					"1": { "name": "keyword.sdoc" }
 				},
-				"patterns": [{
-					"name": "keyword.control.sdoc",
-					"match": "\\b(UID|REFS|TITLE|STATEMENT|RATIONALE|COMMENT)\\b"
-				}]
+				"patterns": [
+					{
+						"name": "keyword.control.sdoc",
+						"match": "\\b(UID|MID|VERSION|LEVEL|STATUS|TAGS|VERIFICATION|TITLE|STATEMENT|RATIONALE|COMMENT)\\b"
+					},
+					{
+						"name": "invalid.deprecated.sdoc",
+						"match": "\\b(REFS)\\b"
+					},
+					{
+						"match": "\\b([A-Z]+)\\b",
+						"name": "markup.changed"
+					}
+				]
 			}]
 		},
 		"grammar_field_type": {
@@ -61,6 +74,32 @@
 						"include": "#grammar_field_reference_choice"
 					}
 				]
+			}]
+		},
+		"grammar_relation_type": {
+			"patterns": [{
+				"name": "",
+				"begin": "(^\\s\\s(-|\\s)\\sTYPE:)\\s",
+				"end": "$",
+				"beginCaptures": {
+					"0": { "name": "keyword.sdoc" }
+				},
+				"patterns": [
+					{
+						"name": "constant.numeric.sdoc",
+						"match": "\\b(Parent|Child|File)\\b"
+					}
+				]
+			}]
+		},
+		"grammar_relation_role": {
+			"patterns": [{
+				"name": "",
+				"begin": "(^\\s\\s\\s\\sROLE:)\\s",
+				"end": "$",
+				"beginCaptures": {
+					"0": { "name": "keyword.sdoc" }
+				}
 			}]
 		},
 		"grammar_field_required": {
@@ -218,6 +257,42 @@
 				]
 			}]
 		},
+		"fragment": {
+			"patterns": [{
+				"begin": "(?<!\\.)^\\[FRAGMENT\\]$",
+				"name": "",
+				"end": "^$",
+				"beginCaptures": {
+					"0": { "name": "keyword.sdoc" }
+				},
+				"patterns": [
+					{
+						"include": "#document_field_name"
+					},
+					{
+						"include": "#document_root"
+					},
+					{
+						"include": "#document_options"
+					}
+				]
+			}]
+		},
+		"fragment_from_file": {
+			"begin": "^\\[FRAGMENT_FROM_FILE\\]$",
+			"end": "^$",
+			"patterns": [
+				{
+					"name": "keyword.control.sdoc",
+					"match": "^(FILE):\\s"
+				}
+			],
+			"captures": {
+				"0": {
+					"name": "keyword.sdoc"
+				}
+			}
+		},
 		"grammar": {
 			"patterns": [{
 				"begin": "^\\[\\b(GRAMMAR)\\b\\]$",
@@ -232,7 +307,7 @@
 						"name": "keyword.sdoc"
 					},
 					{
-						"match": "^(-|\\s)\\s(TAG|FIELDS):",
+						"match": "^(-|\\s)\\s(TAG|FIELDS|RELATIONS):",
 						"name": "keyword.sdoc"
 					},
 					{
@@ -243,6 +318,12 @@
 					},
 					{
 						"include": "#grammar_field_required"
+					},
+					{
+						"include": "#grammar_relation_type"
+					},
+					{
+						"include": "#grammar_relation_role"
 					}
 				]
 			}]
@@ -279,19 +360,29 @@
 			}
 		},
 		"requirement_fields": {
-			"patterns": [{
-				"match": "^(MID|UID|LEVEL|STATUS|TAGS|TITLE|STATEMENT|RATIONALE|COMMENT|RELATIONS):\\s",
-				"name": "keyword.control.sdoc"
-			}]
+			"patterns": [
+				{
+					"match": "^(MID|UID|LEVEL|STATUS|TAGS|TITLE|STATEMENT|RATIONALE|COMMENT|RELATIONS):\\s",
+					"name": "keyword.control.sdoc"
+				},
+				{
+					"match": "^(REFS):\\s",
+					"name": "invalid.deprecated.sdoc"
+				},
+				{
+					"match": "^([A-Z]+):\\s",
+					"name": "markup.changed"
+				}
+			]
 		},
-		"requirement_field_params": {
+		"requirement_relations_params": {
 			"patterns": [{
-				"match": "^(-\\sTYPE|\\s\\sVALUE):\\s",
+				"match": "^(-\\sTYPE|\\s\\sVALUE|\\s\\sROLE):\\s",
 				"name": "keyword.other.sdoc"
 			}]
 		},
 		"requirement": {
-			"begin": "^\\[REQUIREMENT\\]$",
+			"begin": "^\\[(COMPOSITE_)?REQUIREMENT\\]$",
 			"end": "^$",
 			"patterns": [
 				{
@@ -301,27 +392,7 @@
 					"include": "#requirement_fields"
 				},
 				{
-					"include": "#requirement_field_params"
-				}
-			],
-			"captures": {
-				"0": {
-					"name": "keyword.sdoc"
-				}
-			}
-		},
-		"composite_requirement": {
-			"begin": "^\\[COMPOSITE_REQUIREMENT\\]$",
-			"end": "^$",
-			"patterns": [
-				{
-					"include": "#field_rst_value"
-				},
-				{
-					"include": "#requirement_fields"
-				},
-				{
-					"include": "#requirement_field_params"
+					"include": "#requirement_relations_params"
 				}
 			],
 			"captures": {
