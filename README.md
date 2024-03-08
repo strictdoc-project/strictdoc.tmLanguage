@@ -41,7 +41,7 @@ git clone git@github.com:strictdoc-project/strictdoc.tmLanguage.git
 Copy the cloned folder as-is to your user's VS Code extensions folder:
 
 ```bash
-cp -rv strictdoc.tmLanguage $HOME/.vscode/extensions/
+cp -rv strictdoc.tmLanguage/* $HOME/.vscode/extensions/
 ```
 
 This instruction has been tested to work correctly and is taken from:
