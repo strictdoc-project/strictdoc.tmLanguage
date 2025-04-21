@@ -136,7 +136,7 @@
 		"document_options_node_style": {
 			"patterns": [{
 				"name": "",
-				"match": "(^\\s\\sREQUIREMENT_STYLE:)\\s\\b(Inline|Simple|Table|Zebra)\\b$",
+				"match": "(^\\s\\sREQUIREMENT_STYLE:)\\s\\b(Inline|Simple|Table|Zebra|Narrative)\\b$",
 				"captures": {
 					"1": { "name": "keyword.control.sdoc" },
 					"2": { "name": "constant.numeric.sdoc" }
