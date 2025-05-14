@@ -49,6 +49,9 @@
 						"include": "#field_title"
 					},
 					{
+						"include": "#field_version"
+					},
+					{
 						"include": "#field_req_prefix"
 					},
 					{
@@ -56,6 +59,9 @@
 					},
 					{
 						"include": "#document_options"
+					},
+					{
+						"include": "#document_metadata"
 					},
 					{
 						"include": "#document_fields_with_string_value"
@@ -85,7 +91,7 @@
 			"patterns": [{
 				"begin": "^OPTIONS:$",
 				"name": "",
-				"end": "^$",
+ 			    "end": "^(?=METADATA:|$)",
 				"beginCaptures": {
 					"0": { "name": "keyword.control.sdoc" }
 				},
@@ -173,6 +179,29 @@
 				]
 			}]
 		},
+        "document_metadata": {
+          	"patterns": [
+				{
+					"match": "^METADATA:\\s*$",
+					"name": "keyword.control.sdoc"
+				},
+				{
+					"begin": "^(\\s{2,})([a-zA-Z_][a-zA-Z0-9_\\-]*)(\\s*):(\\s*)",
+					"beginCaptures": {
+						"2": { "name": "string.unquoted.sdoc" },
+						"3": { "name": "punctuation.separator.key-value.sdoc" }
+					},
+					"end": "^$",
+					"name": "meta.metadata.block.sdoc",
+					"patterns": [
+						{
+							"match": ".+",
+							"name": "string.unquoted.sdoc"
+						}
+					]
+				}
+			]
+		},
 		"document_fields_with_string_value": {
 			"patterns": [
 				{
@@ -190,13 +219,21 @@
 						"1": { "name": "keyword.control.sdoc" },
 						"2": { "name": "string.sdoc" }
 					}
+				},
+				{
+					"name": "keyword.control.sdoc",
+					"match": "^\\b(DATE)\\b:\\s(\\S+)$",
+					"captures": {
+						"1": { "name": "keyword.control.sdoc" },
+						"2": { "name": "string.sdoc" }
+					}
 				}
 			]
 		},
 		"document_field_name_pattern": {
 			"patterns": [{
 				"name": "invalid.sdoc",
-				"match": "^\\b(MID|UID|TITLE|VERSION|CLASSIFICATION|REQ_PREFIX|ROOT|OPTIONS)\\b:"
+				"match": "^\\b(MID|UID|TITLE|VERSION|DATE|CLASSIFICATION|REQ_PREFIX|ROOT|OPTIONS|METADATA)\\b:"
 			}]
 		},
 		"document_from_file": {
@@ -527,6 +564,19 @@
 				{
 					"name": "keyword.control.sdoc",
 					"match": "^\\b(TITLE)\\b:\\s([\\d\\D]+)$",
+					"captures": {
+						"1": { "name": "keyword.control.sdoc" },
+						"2": { "name": "string.sdoc" }
+					}
+				}
+			]
+		},
+		"field_version": {
+			"comment": "for document",
+			"patterns": [
+				{
+					"name": "keyword.control.sdoc",
+					"match": "^\\b(VERSION)\\b:\\s([\\d\\D]+)$",
 					"captures": {
 						"1": { "name": "keyword.control.sdoc" },
 						"2": { "name": "string.sdoc" }
