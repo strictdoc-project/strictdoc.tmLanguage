@@ -186,7 +186,7 @@
                     "name": "keyword.control.sdoc"
                 },
                 {
-                    "begin": "^(\\s{2,})([a-zA-Z_][a-zA-Z0-9_\\-]*)(\\s*):(\\s*)",
+                    "begin": "^(\\s{2})([a-zA-Z_][a-zA-Z0-9_\\-]*)(\\s*):(\\s*)",
                     "beginCaptures": {
                         "2": { "name": "string.unquoted.sdoc" },
                         "3": { "name": "punctuation.separator.key-value.sdoc" }
