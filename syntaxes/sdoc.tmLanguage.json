@@ -115,6 +115,9 @@
                         "include": "#document_options_view_style"
                     },
                     {
+                        "include": "#document_options_requirement_in_toc_deprecated"
+                    },
+                    {
                         "include": "#document_options_node_in_toc"
                     }
                 ]
@@ -168,12 +171,29 @@
             }]
         },
         "document_options_node_in_toc": {
+            "comment": "Defines whether node appears in TOC.",
+            "patterns": [{
+                "name": "",
+                "begin": "(^\\s\\sNODE_IN_TOC:)",
+                "end": "$",
+                "beginCaptures": {
+                    "0": { "name": "keyword.control.sdoc" }
+                },
+                "patterns": [
+                    {
+                        "include": "#choice_boolean"
+                    }
+                ]
+            }]
+        },
+        "document_options_requirement_in_toc_deprecated": {
+            "comment": "Deprecated field: use NODE_IN_TOC instead.",
             "patterns": [{
                 "name": "",
                 "begin": "(^\\s\\sREQUIREMENT_IN_TOC:)",
                 "end": "$",
                 "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
+                    "0": { "name": "invalid.deprecated.sdoc" }
                 },
                 "patterns": [
                     {
