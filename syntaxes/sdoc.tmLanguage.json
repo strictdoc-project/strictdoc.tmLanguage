@@ -55,6 +55,9 @@
                         "include": "#field_req_prefix"
                     },
                     {
+                        "include": "#field_prefix"
+                    },
+                    {
                         "include": "#document_root"
                     },
                     {
@@ -233,7 +236,7 @@
         "document_field_name_pattern": {
             "patterns": [{
                 "name": "invalid.sdoc",
-                "match": "^\\b(MID|UID|TITLE|VERSION|DATE|CLASSIFICATION|REQ_PREFIX|ROOT|OPTIONS|METADATA)\\b:"
+                "match": "^\\b(MID|UID|TITLE|VERSION|DATE|CLASSIFICATION|PREFIX|REQ_PREFIX|ROOT|OPTIONS|METADATA)\\b:"
             }]
         },
         "document_from_file": {
@@ -448,6 +451,9 @@
                     "include": "#field_req_prefix"
                 },
                 {
+                    "include": "#field_prefix"
+                },
+                {
                     "include": "#section_field_names_without_values"
                 }
             ],
@@ -461,7 +467,7 @@
             "patterns": [
                 {
                     "comment": "reserved section fields",
-                    "match": "^(MID|UID|LEVEL|TITLE|REQ_PREFIX):\\s",
+                    "match": "^(MID|UID|LEVEL|TITLE|PREFIX|REQ_PREFIX):\\s",
                     "name": "keyword.control.sdoc"
                 }
             ]
@@ -585,11 +591,24 @@
             ]
         },
         "field_req_prefix": {
-            "comment": "for document and section",
+            "comment": "Deprecated (legacy support): replaced by PREFIX in [DOCUMENT] and [SECTION].",
             "patterns": [
                 {
                     "name": "keyword.control.sdoc",
                     "match": "^\\b(REQ_PREFIX)\\b:\\s(\\S+)$",
+                    "captures": {
+                        "1": { "name": "invalid.deprecated.sdoc" },
+                        "2": { "name": "string.sdoc" }
+                    }
+                }
+            ]
+        },
+        "field_prefix": {
+            "comment": "Defines prefix for UID generation in [DOCUMENT] and [SECTION] blocks.",
+            "patterns": [
+                {
+                    "name": "keyword.control.sdoc",
+                    "match": "^\\b(PREFIX)\\b:\\s(\\S+)$",
                     "captures": {
                         "1": { "name": "keyword.control.sdoc" },
                         "2": { "name": "string.sdoc" }
