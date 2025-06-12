@@ -33,10 +33,17 @@
         "configuration": "./language-configuration.json"
       }
     ],
-    "grammars": [{
-      "language": "sdoc",
-      "scopeName": "source.sdoc",
-      "path": "./syntaxes/sdoc.tmLanguage.json"
-    }]
+    "grammars": [
+      {
+        "language": "sdoc",
+        "scopeName": "source.sdoc",
+        "path": "./syntaxes/sdoc.tmLanguage.json"
+      }
+    ]
+  },
+  "dependencies": {
+    "onigasm": "^2.2.5",
+    "vscode-textmate": "^9.2.0",
+    "vscode-oniguruma": "^1.5.1"
   }
 }

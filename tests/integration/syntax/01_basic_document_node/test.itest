@@ -1,0 +1,7 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s
+
+CHECK: [1:0-10] "[DOCUMENT]" → source.sdoc keyword.sdoc
+CHECK: [2:0-5] "TITLE" → source.sdoc keyword.control.sdoc keyword.control.sdoc
+CHECK: [2:5-7] ": " → source.sdoc keyword.control.sdoc
+CHECK: [2:7-22] "Document Title" → source.sdoc keyword.control.sdoc string.sdoc
+CHECK: [3:0-1] "" → source.sdoc

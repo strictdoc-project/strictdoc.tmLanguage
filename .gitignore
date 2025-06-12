@@ -1,4 +1,10 @@
 .idea
 node_modules
+package-lock.json
 *.vsix
 /_*
+
+# tests/integration
+.lit_test_times.txt
+**/Output/**
+
