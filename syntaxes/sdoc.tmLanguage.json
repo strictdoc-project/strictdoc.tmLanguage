@@ -109,7 +109,10 @@
                         "include": "#document_options_auto_levels"
                     },
                     {
-                        "include": "#document_options_node_style"
+                        "include": "#document_options_requirement_style_deprecated"
+                    },
+                    {
+                        "include": "#document_options_view_style"
                     },
                     {
                         "include": "#document_options_node_in_toc"
@@ -142,10 +145,22 @@
                 }
             }]
         },
-        "document_options_node_style": {
+        "document_options_requirement_style_deprecated": {
+            "comment": "Deprecated field: use VIEW_STYLE instead.",
             "patterns": [{
                 "name": "",
                 "match": "(^\\s\\sREQUIREMENT_STYLE:)\\s\\b(Inline|Simple|Table|Zebra|Narrative)\\b$",
+                "captures": {
+                    "1": { "name": "invalid.deprecated.sdoc" },
+                    "2": { "name": "constant.numeric.sdoc" }
+                }
+            }]
+        },
+        "document_options_view_style": {
+            "comment": "Defines node view style",
+            "patterns": [{
+                "name": "",
+                "match": "(^\\s\\sVIEW_STYLE:)\\s\\b(Inline|Simple|Table|Zebra|Narrative)\\b$",
                 "captures": {
                     "1": { "name": "keyword.control.sdoc" },
                     "2": { "name": "constant.numeric.sdoc" }
