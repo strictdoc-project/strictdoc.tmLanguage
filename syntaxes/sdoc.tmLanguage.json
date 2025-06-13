@@ -20,6 +20,12 @@
             "include": "#node"
         },
         {
+            "include": "#forbidden_composite_tags"
+        },
+        {
+            "include": "#composite_node"
+        },
+        {
             "include": "#document_from_file"
         },
         {
@@ -215,7 +221,7 @@
             }]
         },
         "document_metadata": {
-              "patterns": [
+            "patterns": [
                 {
                     "match": "^METADATA:\\s*$",
                     "name": "keyword.control.sdoc"
@@ -331,7 +337,7 @@
         "grammar_element": {
                 "patterns": [
                     {
-                        "begin": "^(-\\sTAG:)\\s\\b([A-Z0-9_]+)\\b$",
+                        "begin": "^(-\\sTAG:)\\s\\b([A-Z]+(_[A-Z]+)*)\\b$",
                         "name": "",
                         "end": "$",
                         "beginCaptures": {
@@ -464,6 +470,7 @@
             }]
         },
         "section": {
+            "comment": "SECTION tag is deprecated: planned for removal by the end of 2025",
             "begin": "^\\[SECTION\\]$",
             "end": "^$",
             "patterns": [
@@ -491,11 +498,12 @@
             ],
             "captures": {
                 "0": {
-                    "name": "keyword.sdoc"
+                    "name": "invalid.deprecated.sdoc"
                 }
             }
         },
         "section_field_names_without_values": {
+            "comment": "SECTION tag is deprecated: planned for removal by the end of 2025",
             "patterns": [
                 {
                     "comment": "reserved section fields",
@@ -505,14 +513,10 @@
             ]
         },
         "node": {
-            "comment": "Node and Composite Node: use the tag pattern and exclude reserved tags",
-            "begin": "^\\[(?!DOCUMENT|GRAMMAR|SECTION|DOCUMENT_FROM_FILE)([A-Z0-9_]+)\\]$",
+            "comment": "Node: use the tag pattern and exclude reserved tags; SECTION tag is deprecated",
+            "begin": "^\\[(?!DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE|SECTION)([A-Z]+(_[A-Z]+)*)\\]$",
             "end": "^$",
-            "captures": {
-                "0": {
-                    "name": "keyword.sdoc"
-                }
-            },
+            "captures": { "0": { "name": "keyword.sdoc" } },
             "patterns": [
                 {
                     "include": "#field_mid"
@@ -525,6 +529,9 @@
                 },
                 {
                     "include": "#field_level_with_skipping"
+                },
+                {
+                    "include": "#field_prefix"
                 },
                 {
                     "include": "#node_relations"
@@ -540,19 +547,67 @@
                 }
             ]
         },
+        "composite_node": {
+            "comment": "Composite Node: use the tag pattern and exclude reserved tags; SECTION tag is deprecated",
+            "begin": "^\\[\\[(?!(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE|SECTION)\\]\\])([A-Z]+(?:_[A-Z]+)*)\\]\\]$",
+            "end": "^$",
+            "captures": { "0": { "name": "keyword.sdoc" } },
+            "patterns": [
+                {
+                    "include": "#field_mid"
+                },
+                {
+                    "include": "#field_uid"
+                },
+                {
+                    "include": "#field_title"
+                },
+                {
+                    "include": "#field_level_with_skipping"
+                },
+                {
+                    "include": "#field_prefix"
+                },
+                {
+                    "include": "#node_relations"
+                },
+                {
+                    "include": "#node_field_refs_deprecated"
+                },
+                {
+                    "include": "#node_field_general_except_specific"
+                },
+                {
+                    "include": "#node_field_names_without_values"
+                }
+            ]
+        },
+        "forbidden_composite_tags": {
+            "comment": "Catch forbidden composite node tags and highlight them as invalid",
+            "match": "^\\[\\[(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE)\\]\\]$",
+            "name": "invalid.illegal.sdoc"
+        },
         "closing_tag": {
             "patterns": [
                 {
+                    "comment": "SECTION tag is deprecated: planned for removal by the end of 2025",
+                    "name": "invalid.deprecated.sdoc",
+                    "match": "^\\[\\/?(SECTION)\\]$"
+                },
+                {
+                    "comment": "Invalid closing tags for forbidden blocks",
                     "name": "invalid.illegal.sdoc",
-                    "match": "\\[\\/(REQUIREMENT|GRAMMAR|DOCUMENT)\\]"
+                    "match": "^\\[\\[\\/(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE)\\]\\]$"
                 },
                 {
+                    "comment": "Only composite nodes with double brackets have a valid closing tag",
                     "name": "keyword.sdoc",
-                    "match": "^\\[\\/?SECTION\\]$"
+                    "match": "^\\[\\[\\/(?!(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE)\\]\\])([A-Z]+(_[A-Z]+)*)\\]\\]$"
                 },
                 {
-                    "name": "keyword.sdoc",
-                    "match": "^\\[\\/?COMPOSITE_REQUIREMENT\\]$"
+                    "comment": "Only composite nodes with double brackets have a valid closing tag",
+                    "name": "invalid.illegal.sdoc",
+                    "match": "^\\[\\/(.*)\\]$"
                 }
             ]
         },
