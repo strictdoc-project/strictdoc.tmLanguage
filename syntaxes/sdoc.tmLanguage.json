@@ -94,7 +94,7 @@
             "patterns": [{
                 "begin": "^OPTIONS:$",
                 "name": "",
-                "end": "^(?=METADATA:|$)",
+                "end": "^(?=METADATA:$|$)",
                 "beginCaptures": {
                     "0": { "name": "keyword.control.sdoc" }
                 },
