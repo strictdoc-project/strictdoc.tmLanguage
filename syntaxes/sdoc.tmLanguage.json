@@ -20,7 +20,10 @@
             "include": "#node"
         },
         {
-            "include": "#freetext"
+            "include": "#forbidden_composite_tags"
+        },
+        {
+            "include": "#composite_node"
         },
         {
             "include": "#document_from_file"
@@ -53,6 +56,9 @@
                     },
                     {
                         "include": "#field_req_prefix"
+                    },
+                    {
+                        "include": "#field_prefix"
                     },
                     {
                         "include": "#document_root"
@@ -91,7 +97,7 @@
             "patterns": [{
                 "begin": "^OPTIONS:$",
                 "name": "",
-                "end": "^(?=METADATA:|$)",
+                "end": "^(?=METADATA:$|$)",
                 "beginCaptures": {
                     "0": { "name": "keyword.control.sdoc" }
                 },
@@ -106,7 +112,13 @@
                         "include": "#document_options_auto_levels"
                     },
                     {
-                        "include": "#document_options_node_style"
+                        "include": "#document_options_requirement_style_deprecated"
+                    },
+                    {
+                        "include": "#document_options_view_style"
+                    },
+                    {
+                        "include": "#document_options_requirement_in_toc_deprecated"
                     },
                     {
                         "include": "#document_options_node_in_toc"
@@ -139,10 +151,22 @@
                 }
             }]
         },
-        "document_options_node_style": {
+        "document_options_requirement_style_deprecated": {
+            "comment": "Deprecated field: use VIEW_STYLE instead.",
             "patterns": [{
                 "name": "",
                 "match": "(^\\s\\sREQUIREMENT_STYLE:)\\s\\b(Inline|Simple|Table|Zebra|Narrative)\\b$",
+                "captures": {
+                    "1": { "name": "invalid.deprecated.sdoc" },
+                    "2": { "name": "constant.numeric.sdoc" }
+                }
+            }]
+        },
+        "document_options_view_style": {
+            "comment": "Defines node view style",
+            "patterns": [{
+                "name": "",
+                "match": "(^\\s\\sVIEW_STYLE:)\\s\\b(Inline|Simple|Table|Zebra|Narrative)\\b$",
                 "captures": {
                     "1": { "name": "keyword.control.sdoc" },
                     "2": { "name": "constant.numeric.sdoc" }
@@ -150,12 +174,29 @@
             }]
         },
         "document_options_node_in_toc": {
+            "comment": "Defines whether node appears in TOC.",
+            "patterns": [{
+                "name": "",
+                "begin": "(^\\s\\sNODE_IN_TOC:)",
+                "end": "$",
+                "beginCaptures": {
+                    "0": { "name": "keyword.control.sdoc" }
+                },
+                "patterns": [
+                    {
+                        "include": "#choice_boolean"
+                    }
+                ]
+            }]
+        },
+        "document_options_requirement_in_toc_deprecated": {
+            "comment": "Deprecated field: use NODE_IN_TOC instead.",
             "patterns": [{
                 "name": "",
                 "begin": "(^\\s\\sREQUIREMENT_IN_TOC:)",
                 "end": "$",
                 "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
+                    "0": { "name": "invalid.deprecated.sdoc" }
                 },
                 "patterns": [
                     {
@@ -180,7 +221,7 @@
             }]
         },
         "document_metadata": {
-              "patterns": [
+            "patterns": [
                 {
                     "match": "^METADATA:\\s*$",
                     "name": "keyword.control.sdoc"
@@ -233,7 +274,7 @@
         "document_field_name_pattern": {
             "patterns": [{
                 "name": "invalid.sdoc",
-                "match": "^\\b(MID|UID|TITLE|VERSION|DATE|CLASSIFICATION|REQ_PREFIX|ROOT|OPTIONS|METADATA)\\b:"
+                "match": "^\\b(MID|UID|TITLE|VERSION|DATE|CLASSIFICATION|PREFIX|REQ_PREFIX|ROOT|OPTIONS|METADATA)\\b:"
             }]
         },
         "document_from_file": {
@@ -296,7 +337,7 @@
         "grammar_element": {
                 "patterns": [
                     {
-                        "begin": "^(-\\sTAG:)\\s\\b([A-Z0-9_]+)\\b$",
+                        "begin": "^(-\\sTAG:)\\s\\b([A-Z]+(_[A-Z]+)*)\\b$",
                         "name": "",
                         "end": "$",
                         "beginCaptures": {
@@ -429,6 +470,7 @@
             }]
         },
         "section": {
+            "comment": "SECTION tag is deprecated: planned for removal by the end of 2025",
             "begin": "^\\[SECTION\\]$",
             "end": "^$",
             "patterns": [
@@ -448,49 +490,33 @@
                     "include": "#field_req_prefix"
                 },
                 {
+                    "include": "#field_prefix"
+                },
+                {
                     "include": "#section_field_names_without_values"
                 }
             ],
             "captures": {
                 "0": {
-                    "name": "keyword.sdoc"
+                    "name": "invalid.deprecated.sdoc"
                 }
             }
         },
         "section_field_names_without_values": {
+            "comment": "SECTION tag is deprecated: planned for removal by the end of 2025",
             "patterns": [
                 {
                     "comment": "reserved section fields",
-                    "match": "^(MID|UID|LEVEL|TITLE|REQ_PREFIX):\\s",
+                    "match": "^(MID|UID|LEVEL|TITLE|PREFIX|REQ_PREFIX):\\s",
                     "name": "keyword.control.sdoc"
                 }
             ]
         },
-        "freetext": {
-            "begin": "^\\[FREETEXT\\]$",
-            "end": "^\\[\\/FREETEXT\\]$",
-            "contentName": "source.rst",
-            "patterns": [
-                {
-                    "comment": "FIXME: See 'The problem of leaking incorrect RST markup'.",
-                    "include": "source.rst"
-                }
-            ],
-            "captures": {
-                "0": {
-                    "name": "keyword.sdoc"
-                }
-            }
-        },
         "node": {
-            "comment": "REQUIREMENT/COMPOSITE_REQUIREMENT or similar elements: use the tag pattern and exclude reserved tags",
-            "begin": "^\\[(?!DOCUMENT|GRAMMAR|SECTION|FREETEXT|DOCUMENT_FROM_FILE)([A-Z0-9_]+)\\]$",
+            "comment": "Node: use the tag pattern and exclude reserved tags; SECTION tag is deprecated",
+            "begin": "^\\[(?!DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE|SECTION)([A-Z]+(_[A-Z]+)*)\\]$",
             "end": "^$",
-            "captures": {
-                "0": {
-                    "name": "keyword.sdoc"
-                }
-            },
+            "captures": { "0": { "name": "keyword.sdoc" } },
             "patterns": [
                 {
                     "include": "#field_mid"
@@ -503,6 +529,9 @@
                 },
                 {
                     "include": "#field_level_with_skipping"
+                },
+                {
+                    "include": "#field_prefix"
                 },
                 {
                     "include": "#node_relations"
@@ -518,19 +547,67 @@
                 }
             ]
         },
+        "composite_node": {
+            "comment": "Composite Node: use the tag pattern and exclude reserved tags; SECTION tag is deprecated",
+            "begin": "^\\[\\[(?!(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE|SECTION)\\]\\])([A-Z]+(?:_[A-Z]+)*)\\]\\]$",
+            "end": "^$",
+            "captures": { "0": { "name": "keyword.sdoc" } },
+            "patterns": [
+                {
+                    "include": "#field_mid"
+                },
+                {
+                    "include": "#field_uid"
+                },
+                {
+                    "include": "#field_title"
+                },
+                {
+                    "include": "#field_level_with_skipping"
+                },
+                {
+                    "include": "#field_prefix"
+                },
+                {
+                    "include": "#node_relations"
+                },
+                {
+                    "include": "#node_field_refs_deprecated"
+                },
+                {
+                    "include": "#node_field_general_except_specific"
+                },
+                {
+                    "include": "#node_field_names_without_values"
+                }
+            ]
+        },
+        "forbidden_composite_tags": {
+            "comment": "Catch forbidden composite node tags and highlight them as invalid",
+            "match": "^\\[\\[(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE)\\]\\]$",
+            "name": "invalid.illegal.sdoc"
+        },
         "closing_tag": {
             "patterns": [
                 {
+                    "comment": "SECTION tag is deprecated: planned for removal by the end of 2025",
+                    "name": "invalid.deprecated.sdoc",
+                    "match": "^\\[\\/?(SECTION)\\]$"
+                },
+                {
+                    "comment": "Invalid closing tags for forbidden blocks",
                     "name": "invalid.illegal.sdoc",
-                    "match": "\\[\\/(REQUIREMENT|GRAMMAR|DOCUMENT)\\]"
+                    "match": "^\\[\\[\\/(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE)\\]\\]$"
                 },
                 {
+                    "comment": "Only composite nodes with double brackets have a valid closing tag",
                     "name": "keyword.sdoc",
-                    "match": "^\\[\\/?SECTION\\]$"
+                    "match": "^\\[\\[\\/(?!(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE)\\]\\])([A-Z]+(_[A-Z]+)*)\\]\\]$"
                 },
                 {
-                    "name": "keyword.sdoc",
-                    "match": "^\\[\\/?COMPOSITE_REQUIREMENT\\]$"
+                    "comment": "Only composite nodes with double brackets have a valid closing tag",
+                    "name": "invalid.illegal.sdoc",
+                    "match": "^\\[\\/(.*)\\]$"
                 }
             ]
         },
@@ -550,7 +627,7 @@
             "patterns": [
                 {
                     "name": "keyword.control.sdoc",
-                    "match": "(^UID:)\\s\\b(\\S+)\\b$",
+                    "match": "(^UID:)\\s([\\w]+[\\w()\\-\\/\\.: ]*)$",
                     "captures": {
                         "1": { "name": "keyword.control.sdoc" },
                         "2": { "name": "string.unquoted.sdoc" }
@@ -585,11 +662,24 @@
             ]
         },
         "field_req_prefix": {
-            "comment": "for document and section",
+            "comment": "Deprecated (legacy support): replaced by PREFIX in [DOCUMENT] and [SECTION].",
             "patterns": [
                 {
                     "name": "keyword.control.sdoc",
                     "match": "^\\b(REQ_PREFIX)\\b:\\s(\\S+)$",
+                    "captures": {
+                        "1": { "name": "invalid.deprecated.sdoc" },
+                        "2": { "name": "string.sdoc" }
+                    }
+                }
+            ]
+        },
+        "field_prefix": {
+            "comment": "Defines prefix for UID generation in [DOCUMENT] and [SECTION] blocks.",
+            "patterns": [
+                {
+                    "name": "keyword.control.sdoc",
+                    "match": "^\\b(PREFIX)\\b:\\s(\\S+)$",
                     "captures": {
                         "1": { "name": "keyword.control.sdoc" },
                         "2": { "name": "string.sdoc" }
