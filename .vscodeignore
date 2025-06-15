@@ -19,3 +19,6 @@ tests/**
 
 # GitHub workflows, CI
 .github/**
+
+# Screenshots and extra assets (excluded from VSIX)
+assets/**

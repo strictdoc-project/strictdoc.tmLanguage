@@ -5,7 +5,7 @@ highlighting for the StrictDoc markup language.
 
 [StrictDoc](https://github.com/strictdoc-project/strictdoc) is:
 
-> Software for technical documentation and requirements management. 
+> Software for technical documentation and requirements management.
 
 ## Demos
 
