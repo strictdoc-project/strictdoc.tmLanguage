@@ -1,7 +1,7 @@
 {
   "name": "strictdoc",
   "displayName": "StrictDoc Language Basics",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "StrictDoc",
   "description": "Support for the StrictDoc markup: https://github.com/strictdoc-project/",
   "homepage": "https://github.com/strictdoc-project/strictdoc.tmLanguage",
