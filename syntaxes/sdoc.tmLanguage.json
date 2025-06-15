@@ -1,224 +1,156 @@
 {
     "comment": "StrictDoc Syntax: version 0.1.0",
-    "fileTypes": [
-        "sdoc"
-    ],
+    "fileTypes": [ "sdoc" ],
     "firstLineMatch": "^(\\[DOCUMENT\\])$",
     "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
     "name": "StrictDoc",
     "patterns": [
-        {
-            "include": "#document"
-        },
-        {
-            "include": "#grammar"
-        },
-        {
-            "include": "#section"
-        },
-        {
-            "include": "#node"
-        },
-        {
-            "include": "#forbidden_composite_tags"
-        },
-        {
-            "include": "#composite_node"
-        },
-        {
-            "include": "#document_from_file"
-        },
-        {
-            "include": "#closing_tag"
-        }
+        { "include": "#document" },
+        { "include": "#grammar" },
+        { "include": "#section" },
+        { "include": "#node" },
+        { "include": "#forbidden_composite_tags" },
+        { "include": "#composite_node" },
+        { "include": "#document_from_file" },
+        { "include": "#closing_tag" }
     ],
     "repository": {
         "document": {
-            "patterns": [{
-                "begin": "(?<!\\.)^\\[DOCUMENT\\]$",
-                "name": "",
-                "end": "^$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#field_mid"
-                    },
-                    {
-                        "include": "#field_uid"
-                    },
-                    {
-                        "include": "#field_title"
-                    },
-                    {
-                        "include": "#field_version"
-                    },
-                    {
-                        "include": "#field_req_prefix"
-                    },
-                    {
-                        "include": "#field_prefix"
-                    },
-                    {
-                        "include": "#document_root"
-                    },
-                    {
-                        "include": "#document_options"
-                    },
-                    {
-                        "include": "#document_metadata"
-                    },
-                    {
-                        "include": "#document_fields_with_string_value"
-                    },
-                    {
-                        "include": "#document_field_name_pattern"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "begin": "(?<!\\.)^\\[DOCUMENT\\]$",
+                    "name": "",
+                    "end": "^$",
+                    "beginCaptures": { "0": { "name": "keyword.sdoc" } },
+                    "patterns": [
+                        { "include": "#field_mid" },
+                        { "include": "#field_uid" },
+                        { "include": "#field_title" },
+                        { "include": "#field_version" },
+                        { "include": "#field_req_prefix" },
+                        { "include": "#field_prefix" },
+                        { "include": "#document_root" },
+                        { "include": "#document_options" },
+                        { "include": "#document_metadata" },
+                        { "include": "#document_fields_with_string_value" },
+                        { "include": "#document_field_name_pattern" }
+                    ]
+                }
+            ]
         },
         "document_root": {
-            "patterns": [{
-                "name": "",
-                "begin": "(^ROOT:)",
-                "end": "$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#choice_boolean"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^ROOT:)",
+                    "end": "$",
+                    "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
+                    "patterns": [ { "include": "#choice_boolean" } ]
+                }
+            ]
         },
         "document_options": {
-            "patterns": [{
-                "begin": "^OPTIONS:$",
-                "name": "",
-                "end": "^(?=METADATA:$|$)",
-                "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#document_options_mid"
-                    },
-                    {
-                        "include": "#document_options_markup"
-                    },
-                    {
-                        "include": "#document_options_auto_levels"
-                    },
-                    {
-                        "include": "#document_options_requirement_style_deprecated"
-                    },
-                    {
-                        "include": "#document_options_view_style"
-                    },
-                    {
-                        "include": "#document_options_requirement_in_toc_deprecated"
-                    },
-                    {
-                        "include": "#document_options_node_in_toc"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "begin": "^OPTIONS:$",
+                    "name": "",
+                    "end": "^(?=METADATA:$|$)",
+                    "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
+                    "patterns": [
+                        { "include": "#document_options_mid" },
+                        { "include": "#document_options_markup" },
+                        { "include": "#document_options_auto_levels" },
+                        { "include": "#document_options_requirement_style_deprecated" },
+                        { "include": "#document_options_view_style" },
+                        { "include": "#document_options_requirement_in_toc_deprecated" },
+                        { "include": "#document_options_node_in_toc" }
+                    ]
+                }
+            ]
         },
         "document_options_mid": {
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\sENABLE_MID:)",
-                "end": "$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#choice_boolean"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\sENABLE_MID:)",
+                    "end": "$",
+                    "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
+                    "patterns": [ { "include": "#choice_boolean" } ]
+                }
+            ]
         },
         "document_options_markup": {
-            "patterns": [{
-                "name": "",
-                "match": "(^\\s\\sMARKUP:)\\s\\b(RST|Text|HTML)\\b$",
-                "captures": {
-                    "1": { "name": "keyword.control.sdoc" },
-                    "2": { "name": "constant.numeric.sdoc" }
+            "patterns": [
+                {
+                    "name": "",
+                    "match": "(^\\s\\sMARKUP:)\\s\\b(RST|Text|HTML)\\b$",
+                    "captures": {
+                        "1": { "name": "keyword.control.sdoc" },
+                        "2": { "name": "constant.numeric.sdoc" }
+                    }
                 }
-            }]
+            ]
         },
         "document_options_requirement_style_deprecated": {
             "comment": "Deprecated field: use VIEW_STYLE instead.",
-            "patterns": [{
-                "name": "",
-                "match": "(^\\s\\sREQUIREMENT_STYLE:)\\s\\b(Inline|Simple|Plain|Table|Zebra|Narrative)\\b$",
-                "captures": {
-                    "1": { "name": "invalid.deprecated.sdoc" },
-                    "2": { "name": "constant.numeric.sdoc" }
+            "patterns": [
+                {
+                    "name": "",
+                    "match": "(^\\s\\sREQUIREMENT_STYLE:)\\s\\b(Inline|Simple|Plain|Table|Zebra|Narrative)\\b$",
+                    "captures": {
+                        "1": { "name": "invalid.deprecated.sdoc" },
+                        "2": { "name": "constant.numeric.sdoc" }
+                    }
                 }
-            }]
+            ]
         },
         "document_options_view_style": {
             "comment": "Defines node view style",
-            "patterns": [{
-                "name": "",
-                "match": "(^\\s\\sVIEW_STYLE:)\\s\\b(Inline|Simple|Plain|Table|Zebra|Narrative)\\b$",
-                "captures": {
-                    "1": { "name": "keyword.control.sdoc" },
-                    "2": { "name": "constant.numeric.sdoc" }
+            "patterns": [
+                {
+                    "name": "",
+                    "match": "(^\\s\\sVIEW_STYLE:)\\s\\b(Inline|Simple|Plain|Table|Zebra|Narrative)\\b$",
+                    "captures": {
+                        "1": { "name": "keyword.control.sdoc" },
+                        "2": { "name": "constant.numeric.sdoc" }
+                    }
                 }
-            }]
+            ]
         },
         "document_options_node_in_toc": {
             "comment": "Defines whether node appears in TOC.",
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\sNODE_IN_TOC:)",
-                "end": "$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#choice_boolean"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\sNODE_IN_TOC:)",
+                    "end": "$",
+                    "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
+                    "patterns": [ { "include": "#choice_boolean" } ]
+                }
+            ]
         },
         "document_options_requirement_in_toc_deprecated": {
             "comment": "Deprecated field: use NODE_IN_TOC instead.",
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\sREQUIREMENT_IN_TOC:)",
-                "end": "$",
-                "beginCaptures": {
-                    "0": { "name": "invalid.deprecated.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#choice_boolean"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\sREQUIREMENT_IN_TOC:)",
+                    "end": "$",
+                    "beginCaptures": { "0": { "name": "invalid.deprecated.sdoc" } },
+                    "patterns": [ { "include": "#choice_boolean" } ]
+                }
+            ]
         },
         "document_options_auto_levels": {
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\sAUTO_LEVELS:)",
-                "end": "$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#choice_enable"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\sAUTO_LEVELS:)",
+                    "end": "$",
+                    "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
+                    "patterns": [ { "include": "#choice_enable" } ]
+                }
+            ]
         },
         "document_metadata": {
             "patterns": [
@@ -272,10 +204,12 @@
             ]
         },
         "document_field_name_pattern": {
-            "patterns": [{
-                "name": "invalid.sdoc",
-                "match": "^\\b(MID|UID|TITLE|VERSION|DATE|CLASSIFICATION|PREFIX|REQ_PREFIX|ROOT|OPTIONS|METADATA)\\b:"
-            }]
+            "patterns": [
+                {
+                    "name": "invalid.sdoc",
+                    "match": "^\\b(MID|UID|TITLE|VERSION|DATE|CLASSIFICATION|PREFIX|REQ_PREFIX|ROOT|OPTIONS|METADATA)\\b:"
+                }
+            ]
         },
         "document_from_file": {
             "begin": "^\\[DOCUMENT_FROM_FILE\\]$",
@@ -298,97 +232,65 @@
                     }
                 }
             ],
-            "captures": {
-                "0": {
-                    "name": "keyword.sdoc"
-                }
-            }
+            "captures": { "0": { "name": "keyword.sdoc" } }
         },
         "grammar": {
-            "patterns": [{
-                "begin": "^\\[\\b(GRAMMAR)\\b\\]$",
-                "name": "",
-                "end": "^$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#grammar_elements"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "begin": "^\\[\\b(GRAMMAR)\\b\\]$",
+                    "name": "",
+                    "end": "^$",
+                    "beginCaptures": { "0": { "name": "keyword.sdoc" } },
+                    "patterns": [ { "include": "#grammar_elements" } ]
+                }
+            ]
         },
         "grammar_elements": {
-            "patterns": [{
-                "begin": "(^ELEMENTS:)$",
-                "name": "",
-                "end": "^$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#grammar_element"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "begin": "(^ELEMENTS:)$",
+                    "name": "",
+                    "end": "^$",
+                    "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
+                    "patterns": [ { "include": "#grammar_element" } ]
+                }
+            ]
         },
         "grammar_element": {
-                "patterns": [
-                    {
-                        "begin": "^(-\\sTAG:)\\s\\b([A-Z]+(_[A-Z]+)*)\\b$",
-                        "name": "",
-                        "end": "$",
-                        "beginCaptures": {
-                            "1": { "name": "keyword.control.sdoc" },
-                            "2": { "name": "string.sdoc" }
-                        }
-                    },
-                    {
-                        "match": "^\\s\\s(PROPERTIES|FIELDS|RELATIONS):$",
-                        "name": "keyword.control.sdoc"
-                    },
-                    {
-                        "include": "#grammar_property_composite"
-                    },
-                    {
-                        "include": "#grammar_property_prefix"
-                    },
-                    {
-                        "include": "#grammar_property_view_style"
-                    },
-                    {
-                        "include": "#grammar_field_title"
-                    },
-                    {
-                        "include": "#grammar_field_type"
-                    },
-                    {
-                        "include": "#grammar_field_required"
-                    },
-                    {
-                        "include": "#grammar_relation_type"
-                    },
-                    {
-                        "include": "#grammar_relation_role"
+            "patterns": [
+                {
+                    "begin": "^(-\\sTAG:)\\s\\b([A-Z]+(_[A-Z]+)*)\\b$",
+                    "name": "",
+                    "end": "$",
+                    "beginCaptures": {
+                        "1": { "name": "keyword.control.sdoc" },
+                        "2": { "name": "string.sdoc" }
                     }
-                ]
+                },
+                {
+                    "match": "^\\s\\s(PROPERTIES|FIELDS|RELATIONS):$",
+                    "name": "keyword.control.sdoc"
+                },
+                { "include": "#grammar_property_composite" },
+                { "include": "#grammar_property_prefix" },
+                { "include": "#grammar_property_view_style" },
+                { "include": "#grammar_field_title" },
+                { "include": "#grammar_field_type" },
+                { "include": "#grammar_field_required" },
+                { "include": "#grammar_relation_type" },
+                { "include": "#grammar_relation_role" }
+            ]
         },
         "grammar_property_composite": {
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\s\\s\\sIS_COMPOSITE:)\\s",
-                "end": "$",
-                "beginCaptures": {
-                    "1": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#choice_boolean"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\s\\s\\sIS_COMPOSITE:)\\s",
+                    "end": "$",
+                    "beginCaptures": { "1": { "name": "keyword.control.sdoc" } },
+                    "patterns": [ { "include": "#choice_boolean" } ]
+                }
+            ]
         },
         "grammar_property_prefix": {
             "patterns": [
@@ -403,37 +305,37 @@
             ]
         },
         "grammar_property_view_style": {
-            "patterns": [{
-                "name": "",
-                "match": "(^\\s\\s\\s\\sVIEW_STYLE:)\\s\\b(Inline|Simple|Plain|Table|Zebra|Narrative)\\b$",
-                "captures": {
-                    "1": { "name": "keyword.control.sdoc" },
-                    "2": { "name": "constant.numeric.sdoc" }
+            "patterns": [
+                {
+                    "name": "",
+                    "match": "(^\\s\\s\\s\\sVIEW_STYLE:)\\s\\b(Inline|Simple|Plain|Table|Zebra|Narrative)\\b$",
+                    "captures": {
+                        "1": { "name": "keyword.control.sdoc" },
+                        "2": { "name": "constant.numeric.sdoc" }
+                    }
                 }
-            }]
+            ]
         },
         "grammar_field_title": {
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\s-\\sTITLE:)\\s",
-                "end": "$",
-                "beginCaptures": {
-                    "1": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "name": "string.sdoc",
-                        "match": "\\b(UID|MID|VERSION|LEVEL|STATUS|TAGS|VERIFICATION|TITLE|STATEMENT|RATIONALE|COMMENT)\\b$"
-                    },
-                    {
-                        "name": "invalid.deprecated.sdoc",
-                        "match": "\\b(REFS)\\b$"
-                    },
-                    {
-                        "include": "#grammar_field_title_pattern"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\s-\\sTITLE:)\\s",
+                    "end": "$",
+                    "beginCaptures": { "1": { "name": "keyword.control.sdoc" } },
+                    "patterns": [
+                        {
+                            "name": "string.sdoc",
+                            "match": "\\b(UID|MID|VERSION|LEVEL|STATUS|TAGS|VERIFICATION|TITLE|STATEMENT|RATIONALE|COMMENT)\\b$"
+                        },
+                        {
+                            "name": "invalid.deprecated.sdoc",
+                            "match": "\\b(REFS)\\b$"
+                        },
+                        { "include": "#grammar_field_title_pattern" }
+                    ]
+                }
+            ]
         },
         "grammar_field_title_pattern": {
             "patterns": [
@@ -445,108 +347,82 @@
             ]
         },
         "grammar_field_type": {
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\s\\s\\sTYPE:)\\s",
-                "end": "$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "name": "constant.numeric.sdoc",
-                        "match": "\\b(String|Tag|SingleChoice\\(|MultipleChoice\\()\\b"
-                    },
-                    {
-                        "include": "#grammar_field_reference_choice"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\s\\s\\sTYPE:)\\s",
+                    "end": "$",
+                    "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
+                    "patterns": [
+                        {
+                            "name": "constant.numeric.sdoc",
+                            "match": "\\b(String|Tag|SingleChoice\\(|MultipleChoice\\()\\b"
+                        },
+                        { "include": "#grammar_field_reference_choice" }
+                    ]
+                }
+            ]
         },
         "grammar_field_required": {
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\s\\s\\sREQUIRED:)\\s",
-                "end": "$",
-                "beginCaptures": {
-                    "1": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#choice_boolean"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\s\\s\\sREQUIRED:)\\s",
+                    "end": "$",
+                    "beginCaptures": { "1": { "name": "keyword.control.sdoc" } },
+                    "patterns": [ { "include": "#choice_boolean" } ]
+                }
+            ]
         },
         "grammar_field_reference_choice": {
-            "patterns": [{
-                "name": "invalid.deprecated",
-                "match": "\\b(ParentReqReference|FileReference|BibReference)\\b"
-            }]
+            "patterns": [
+                {
+                    "name": "invalid.deprecated",
+                    "match": "\\b(ParentReqReference|FileReference|BibReference)\\b"
+                }
+            ]
         },
         "grammar_relation_type": {
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\s(-|\\s)\\sTYPE:)\\s",
-                "end": "$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "name": "constant.numeric.sdoc",
-                        "match": "\\b(Parent|Child|File)\\b"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\s(-|\\s)\\sTYPE:)\\s",
+                    "end": "$",
+                    "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
+                    "patterns": [
+                        {
+                            "name": "constant.numeric.sdoc",
+                            "match": "\\b(Parent|Child|File)\\b"
+                        }
+                    ]
+                }
+            ]
         },
         "grammar_relation_role": {
-            "patterns": [{
-                "name": "",
-                "begin": "(^\\s\\s\\s\\sROLE:)\\s",
-                "end": "$",
-                "beginCaptures": {
-                    "0": { "name": "keyword.control.sdoc" }
-                },
-                "patterns": [
-                    {
-                        "include": "#value_singleline"
-                    }
-                ]
-            }]
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\s\\s\\sROLE:)\\s",
+                    "end": "$",
+                    "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
+                    "patterns": [ { "include": "#value_singleline" } ]
+                }
+            ]
         },
         "section": {
             "comment": "SECTION tag is deprecated: planned for removal by the end of 2025",
             "begin": "^\\[SECTION\\]$",
             "end": "^$",
             "patterns": [
-                {
-                    "include": "#field_mid"
-                },
-                {
-                    "include": "#field_uid"
-                },
-                {
-                    "include": "#field_title"
-                },
-                {
-                    "include": "#field_level_with_skipping"
-                },
-                {
-                    "include": "#field_req_prefix"
-                },
-                {
-                    "include": "#field_prefix"
-                },
-                {
-                    "include": "#section_field_names_without_values"
-                }
+                { "include": "#field_mid" },
+                { "include": "#field_uid" },
+                { "include": "#field_title" },
+                { "include": "#field_level_with_skipping" },
+                { "include": "#field_req_prefix" },
+                { "include": "#field_prefix" },
+                { "include": "#section_field_names_without_values" }
             ],
-            "captures": {
-                "0": {
-                    "name": "invalid.deprecated.sdoc"
-                }
-            }
+            "captures": { "0": { "name": "invalid.deprecated.sdoc" } }
         },
         "section_field_names_without_values": {
             "comment": "SECTION tag is deprecated: planned for removal by the end of 2025",
@@ -564,33 +440,15 @@
             "end": "^$",
             "captures": { "0": { "name": "keyword.sdoc" } },
             "patterns": [
-                {
-                    "include": "#field_mid"
-                },
-                {
-                    "include": "#field_uid"
-                },
-                {
-                    "include": "#field_title"
-                },
-                {
-                    "include": "#field_level_with_skipping"
-                },
-                {
-                    "include": "#field_prefix"
-                },
-                {
-                    "include": "#node_relations"
-                },
-                {
-                    "include": "#node_field_refs_deprecated"
-                },
-                {
-                    "include": "#node_field_general_except_specific"
-                },
-                {
-                    "include": "#node_field_names_without_values"
-                }
+                { "include": "#field_mid" },
+                { "include": "#field_uid" },
+                { "include": "#field_title" },
+                { "include": "#field_level_with_skipping" },
+                { "include": "#field_prefix" },
+                { "include": "#node_relations" },
+                { "include": "#node_field_refs_deprecated" },
+                { "include": "#node_field_general_except_specific" },
+                { "include": "#node_field_names_without_values" }
             ]
         },
         "composite_node": {
@@ -599,33 +457,15 @@
             "end": "^$",
             "captures": { "0": { "name": "keyword.sdoc" } },
             "patterns": [
-                {
-                    "include": "#field_mid"
-                },
-                {
-                    "include": "#field_uid"
-                },
-                {
-                    "include": "#field_title"
-                },
-                {
-                    "include": "#field_level_with_skipping"
-                },
-                {
-                    "include": "#field_prefix"
-                },
-                {
-                    "include": "#node_relations"
-                },
-                {
-                    "include": "#node_field_refs_deprecated"
-                },
-                {
-                    "include": "#node_field_general_except_specific"
-                },
-                {
-                    "include": "#node_field_names_without_values"
-                }
+                { "include": "#field_mid" },
+                { "include": "#field_uid" },
+                { "include": "#field_title" },
+                { "include": "#field_level_with_skipping" },
+                { "include": "#field_prefix" },
+                { "include": "#node_relations" },
+                { "include": "#node_field_refs_deprecated" },
+                { "include": "#node_field_general_except_specific" },
+                { "include": "#node_field_names_without_values" }
             ]
         },
         "forbidden_composite_tags": {
@@ -760,18 +600,10 @@
                     "match": "^(REFS):\\s",
                     "name": "invalid.deprecated.sdoc"
                 },
-                {
-                    "include": "#node_relation_type"
-                },
-                {
-                    "include": "#node_relation_value"
-                },
-                {
-                    "include": "#node_relation_role"
-                },
-                {
-                    "include": "#node_relation_params_names"
-                }
+                { "include": "#node_relation_type" },
+                { "include": "#node_relation_value" },
+                { "include": "#node_relation_role" },
+                { "include": "#node_relation_params_names" }
             ]
         },
         "node_relations": {
@@ -779,27 +611,13 @@
             "begin": "(^RELATIONS:)\\s",
             "end": "^$",
             "patterns": [
-                {
-                    "include": "#node_relation_type"
-                },
-                {
-                    "include": "#node_relation_value"
-                },
-                {
-                    "include": "#node_relation_role"
-                },
-                {
-                    "include": "#node_relation_function"
-                },
-                {
-                    "include": "#node_relation_params_names"
-                }
+                { "include": "#node_relation_type" },
+                { "include": "#node_relation_value" },
+                { "include": "#node_relation_role" },
+                { "include": "#node_relation_function" },
+                { "include": "#node_relation_params_names" }
             ],
-            "captures": {
-                "0": {
-                    "name": "keyword.control.sdoc"
-                }
-            }
+            "captures": { "0": { "name": "keyword.control.sdoc" } }
         },
         "node_relation_type": {
             "patterns": [
@@ -851,10 +669,12 @@
         },
         "node_relation_params_names": {
             "comment": "Used to highlight fields that have not yet been filled in correctly",
-            "patterns": [{
-                "match": "^(-\\sTYPE|\\s\\sVALUE|\\s\\sROLE|\\s\\sFUNCTION):\\s",
-                "name": "keyword.other.sdoc"
-            }]
+            "patterns": [
+                {
+                    "match": "^(-\\sTYPE|\\s\\sVALUE|\\s\\sROLE|\\s\\sFUNCTION):\\s",
+                    "name": "keyword.other.sdoc"
+                }
+            ]
         },
         "node_field_name_pattern": {
             "comment": "Used to highlight fields that have not yet been filled in correctly",
@@ -874,9 +694,7 @@
                     "match": "^(MID|UID|LEVEL|TITLE|STATUS|TAGS|STATEMENT|RATIONALE|COMMENT|RELATIONS):\\s",
                     "name": "keyword.control.sdoc"
                 },
-                {
-                    "include": "#node_field_name_pattern"
-                }
+                { "include": "#node_field_name_pattern" }
             ]
         },
         "node_field_general_except_specific": {
@@ -884,18 +702,10 @@
             "begin": "(^(?!TITLE|LEVEL|MID|UID|RELATIONS|REFS)(_?[A-Z0-9]*(?:_[A-Z0-9]*)?_?):)\\s",
             "end": "$",
             "patterns": [
-                {
-                    "include": "#value_rst"
-                },
-                {
-                    "include": "#value_singleline"
-                }
+                { "include": "#value_rst" },
+                { "include": "#value_singleline" }
             ],
-            "captures": {
-                "0": {
-                    "name": "keyword.control.sdoc"
-                }
-            }
+            "captures": { "0": { "name": "keyword.control.sdoc" } }
         },
         "value_singleline": {
             "patterns": [
@@ -915,23 +725,23 @@
                     "include": "source.rst"
                 }
             ],
-            "captures": {
-                "0": {
-                    "name": "string.quoted.double.sdoc"
-                }
-            }
+            "captures": { "0": { "name": "string.quoted.double.sdoc" } }
         },
         "choice_boolean": {
-            "patterns": [{
-                "name": "constant.language.sdoc",
-                "match": "\\b(True|False)\\b"
-            }]
+            "patterns": [
+                {
+                    "name": "constant.language.sdoc",
+                    "match": "\\b(True|False)\\b"
+                }
+            ]
         },
         "choice_enable": {
-            "patterns": [{
-                "name": "constant.language.sdoc",
-                "match": "\\b(On|Off)\\b"
-            }]
+            "patterns": [
+                {
+                    "name": "constant.language.sdoc",
+                    "match": "\\b(On|Off)\\b"
+                }
+            ]
         }
     },
     "scopeName": "source.sdoc"
