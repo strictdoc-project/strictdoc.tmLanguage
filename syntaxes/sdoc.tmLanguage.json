@@ -453,7 +453,7 @@
         },
         "composite_node": {
             "comment": "Composite Node: use the tag pattern and exclude reserved tags; SECTION tag is deprecated",
-            "begin": "^\\[\\[(?!(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE|SECTION)\\]\\])([A-Z]+(?:_[A-Z]+)*)\\]\\]$",
+            "begin": "^\\[\\[(?!(DOCUMENT|GRAMMAR|DOCUMENT_FROM_FILE)\\]\\])([A-Z]+(?:_[A-Z]+)*)\\]\\]$",
             "end": "^$",
             "captures": { "0": { "name": "keyword.sdoc" } },
             "patterns": [
