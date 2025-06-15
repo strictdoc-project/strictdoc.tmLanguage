@@ -346,8 +346,17 @@
                         }
                     },
                     {
-                        "match": "^\\s\\s(FIELDS|RELATIONS):$",
+                        "match": "^\\s\\s(PROPERTIES|FIELDS|RELATIONS):$",
                         "name": "keyword.control.sdoc"
+                    },
+                    {
+                        "include": "#grammar_property_composite"
+                    },
+                    {
+                        "include": "#grammar_property_prefix"
+                    },
+                    {
+                        "include": "#grammar_property_view_style"
                     },
                     {
                         "include": "#grammar_field_title"
@@ -365,6 +374,43 @@
                         "include": "#grammar_relation_role"
                     }
                 ]
+        },
+        "grammar_property_composite": {
+            "patterns": [{
+                "name": "",
+                "begin": "(^\\s\\s\\s\\sIS_COMPOSITE:)\\s",
+                "end": "$",
+                "beginCaptures": {
+                    "1": { "name": "keyword.control.sdoc" }
+                },
+                "patterns": [
+                    {
+                        "include": "#choice_boolean"
+                    }
+                ]
+            }]
+        },
+        "grammar_property_prefix": {
+            "patterns": [
+                {
+                    "name": "keyword.control.sdoc",
+                    "match": "(^\\s\\s\\s\\sPREFIX:)\\s\\b(\\S+)\\b$",
+                    "captures": {
+                        "1": { "name": "keyword.control.sdoc" },
+                        "2": { "name": "string.sdoc" }
+                    }
+                }
+            ]
+        },
+        "grammar_property_view_style": {
+            "patterns": [{
+                "name": "",
+                "match": "(^\\s\\s\\s\\sVIEW_STYLE:)\\s\\b(Inline|Simple|Plain|Table|Zebra|Narrative)\\b$",
+                "captures": {
+                    "1": { "name": "keyword.control.sdoc" },
+                    "2": { "name": "constant.numeric.sdoc" }
+                }
+            }]
         },
         "grammar_field_title": {
             "patterns": [{
