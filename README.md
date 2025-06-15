@@ -189,3 +189,7 @@ Now, open the `test.sdoc` file using the `Generic Text Editor`.
 You should see the SDoc syntax highlighted:
 
 ![](assets/Eclipse/Screenshot_Eclipse_12.png)
+
+---
+
+📌 See [docs/contributing.md](./docs/contributing.md) for contribution and maintenance notes.
