@@ -4,8 +4,8 @@
 .gitattributes
 vsc-extension-quickstart.md
 
-# Example content (not for users)
-_strictdoc_examples/**
+# Project documentation and example content (not for users)
+docs/**
 
 # Development & test code (Node)
 parse_syntax.js
