@@ -155,7 +155,7 @@
             "comment": "Deprecated field: use VIEW_STYLE instead.",
             "patterns": [{
                 "name": "",
-                "match": "(^\\s\\sREQUIREMENT_STYLE:)\\s\\b(Inline|Simple|Table|Zebra|Narrative)\\b$",
+                "match": "(^\\s\\sREQUIREMENT_STYLE:)\\s\\b(Inline|Simple|Plain|Table|Zebra|Narrative)\\b$",
                 "captures": {
                     "1": { "name": "invalid.deprecated.sdoc" },
                     "2": { "name": "constant.numeric.sdoc" }
@@ -166,7 +166,7 @@
             "comment": "Defines node view style",
             "patterns": [{
                 "name": "",
-                "match": "(^\\s\\sVIEW_STYLE:)\\s\\b(Inline|Simple|Table|Zebra|Narrative)\\b$",
+                "match": "(^\\s\\sVIEW_STYLE:)\\s\\b(Inline|Simple|Plain|Table|Zebra|Narrative)\\b$",
                 "captures": {
                     "1": { "name": "keyword.control.sdoc" },
                     "2": { "name": "constant.numeric.sdoc" }
