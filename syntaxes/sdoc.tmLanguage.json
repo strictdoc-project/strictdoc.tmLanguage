@@ -789,6 +789,9 @@
                     "include": "#node_relation_role"
                 },
                 {
+                    "include": "#node_relation_function"
+                },
+                {
                     "include": "#node_relation_params_names"
                 }
             ],
@@ -822,6 +825,18 @@
                 }
             ]
         },
+        "node_relation_function": {
+            "patterns": [
+                {
+                    "name": "keyword.control.sdoc",
+                    "match": "(^\\s\\sFUNCTION:)\\s\\b(\\S+)\\b$",
+                    "captures": {
+                        "1": { "name": "keyword.control.sdoc" },
+                        "2": { "name": "string.unquoted.sdoc" }
+                    }
+                }
+            ]
+        },
         "node_relation_role": {
             "patterns": [
                 {
@@ -837,7 +852,7 @@
         "node_relation_params_names": {
             "comment": "Used to highlight fields that have not yet been filled in correctly",
             "patterns": [{
-                "match": "^(-\\sTYPE|\\s\\sVALUE|\\s\\sROLE):\\s",
+                "match": "^(-\\sTYPE|\\s\\sVALUE|\\s\\sROLE|\\s\\sFUNCTION):\\s",
                 "name": "keyword.other.sdoc"
             }]
         },
