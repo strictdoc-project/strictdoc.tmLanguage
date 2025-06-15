@@ -1,4 +1,4 @@
-RUN: %parse_syntax %S/sample.sdoc | filecheck %s
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
 
 CHECK: [1:0-10] "[DOCUMENT]" → source.sdoc keyword.sdoc
 CHECK: [2:0-5] "TITLE" → source.sdoc keyword.control.sdoc keyword.control.sdoc
