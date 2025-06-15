@@ -3,4 +3,22 @@
 .gitignore
 .gitattributes
 vsc-extension-quickstart.md
+
+# Example content (not for users)
 _strictdoc_examples/**
+
+# Development & test code (Node)
+parse_syntax.js
+package-lock.json
+node_modules/**
+
+# Development & test code (Python)
+tasks.py
+requirements.txt
+tests/**
+
+# GitHub workflows, CI
+.github/**
+
+# Screenshots and extra assets (excluded from VSIX)
+assets/**

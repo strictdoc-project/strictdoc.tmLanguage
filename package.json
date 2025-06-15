@@ -1,7 +1,7 @@
 {
   "name": "strictdoc",
   "displayName": "StrictDoc Language Basics",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "StrictDoc",
   "description": "Support for the StrictDoc markup: https://github.com/strictdoc-project/",
   "homepage": "https://github.com/strictdoc-project/strictdoc.tmLanguage",
@@ -41,7 +41,7 @@
       }
     ]
   },
-  "dependencies": {
+  "devDependencies": {
     "onigasm": "^2.2.5",
     "vscode-textmate": "^9.2.0",
     "vscode-oniguruma": "^1.5.1"
