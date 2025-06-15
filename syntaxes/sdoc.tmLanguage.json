@@ -1,5 +1,5 @@
 {
-    "comment": "StrictDoc Syntax: version 0.2.0",
+    "comment": "StrictDoc Syntax: version 0.2.1",
     "fileTypes": [ "sdoc" ],
     "firstLineMatch": "^(\\[DOCUMENT\\])$",
     "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
