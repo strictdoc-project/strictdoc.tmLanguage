@@ -4,8 +4,11 @@
 .gitattributes
 vsc-extension-quickstart.md
 
-# Example content (not for users)
-_strictdoc_examples/**
+# GitHub workflows, CI
+.github/**
+
+# Screenshots and extra assets (excluded from VSIX)
+assets/**
 
 # Development & test code (Node)
 parse_syntax.js
@@ -17,8 +20,13 @@ tasks.py
 requirements.txt
 tests/**
 
-# GitHub workflows, CI
-.github/**
+# Project documentation and example content (not for users)
+docs/**
 
-# Screenshots and extra assets (excluded from VSIX)
-assets/**
+# ─────────────────────────────────────────────
+# ❓ For committers: add uncertain files here
+# If you're not sure where to categorize a dev/test file,
+# list it temporarily under this section.
+# ─────────────────────────────────────────────
+# e.g.
+# temp_script.py

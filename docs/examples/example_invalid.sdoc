@@ -1,0 +1,46 @@
+[DOCUMENT]
+TITLE: Document with deprecated REQ_PREFIX, REQUIREMENT_STYLE, REQUIREMENT_IN_TOC
+REQ_PREFIX: _DEPRECATED_
+OPTIONS:
+  REQUIREMENT_STYLE: Inline
+  REQUIREMENT_IN_TOC: True
+
+[GRAMMAR]
+ELEMENTS:
+- TAG: DEPRECATED_TYPE_REF_CHOICES
+  FIELDS:
+  - TITLE: DEPRECATED_1
+    TYPE: ParentReqReference
+  - TITLE: DEPRECATED_2
+    TYPE: FileReference
+  - TITLE: DEPRECATED_3
+    TYPE: BibReference
+
+[SOME_EXAMPLE_NODE]
+TITLE: Node with deprecated REFS tag
+REFS:
+- TYPE: File
+  VALUE: examples/example_source_files/file2.py
+
+[SECTION]
+TITLE: DEPRECATED SECTION TAG
+
+[/SECTION]
+
+[COMPOSITE_REQUIREMENT]
+STATEMENT: This tag name is possible, but will not create a composite node.
+
+[/COMPOSITE_REQUIREMENT]
+
+[ANY_NAME]
+STATEMENT: Only the composite node has a closing tag, and it has double brackets.
+
+[/ANY_NAME]
+
+[[GRAMMAR]]
+
+[[/GRAMMAR]]
+
+[[DOCUMENT_FROM_FILE]]
+
+[[/DOCUMENT_FROM_FILE]]

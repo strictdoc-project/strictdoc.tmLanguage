@@ -1,0 +1,122 @@
+[DOCUMENT]
+MID: b7bcca934cd148c3855beb4c85723bc5
+TITLE: Example document title
+UID: ABCD1234_QWERTY
+VERSION: 0.0.0.0
+CLASSIFICATION: Public
+PREFIX: FOO_SDOC-SSS-
+ROOT: True
+OPTIONS:
+  ENABLE_MID: True
+  MARKUP: RST
+  AUTO_LEVELS: On
+  VIEW_STYLE: Inline
+  NODE_IN_TOC: True
+METADATA:
+  FOO: BAR
+
+[GRAMMAR]
+ELEMENTS:
+- TAG: NODE_NAME_ONE
+  PROPERTIES:
+    IS_COMPOSITE: True
+    PREFIX: None
+    VIEW_STYLE: Narrative
+  FIELDS:
+  - TITLE: MID
+    TYPE: String
+    REQUIRED: False
+  - TITLE: UID
+    TYPE: String
+    REQUIRED: False
+  - TITLE: LEVEL
+    TYPE: String
+    REQUIRED: True
+  - TITLE: PREFIX
+    TYPE: String
+    REQUIRED: True
+  - TITLE: STATUS
+    TYPE: String
+    REQUIRED: False
+  - TITLE: TAGS
+    TYPE: Tag
+    REQUIRED: False
+  - TITLE: TITLE
+    TYPE: String
+    REQUIRED: True
+  - TITLE: STATEMENT
+    TYPE: String
+    REQUIRED: False
+  - TITLE: RATIONALE
+    TYPE: String
+    REQUIRED: False
+  - TITLE: COMMENT
+    TYPE: String
+    REQUIRED: False
+  RELATIONS:
+  - TYPE: Parent
+    ROLE: Implements
+  - TYPE: Child
+    ROLE: Refines
+  - TYPE: File
+- TAG: NODE_NAME_TWO
+  FIELDS:
+  - TITLE: UID
+    TYPE: String
+    REQUIRED: True
+  - TITLE: TITLE
+    TYPE: String
+    REQUIRED: True
+  - TITLE: VERIFICATION
+    TYPE: MultipleChoice(Review, Analysis, Inspection, Test)
+    REQUIRED: True
+  - TITLE: FIELD_ONE
+    TYPE: SingleChoice(A|B|C)
+    REQUIRED: False
+  - TITLE: FIELD_TWO
+    TYPE: MultipleChoice(A|B|C)
+    REQUIRED: False
+
+[[NODE_NAME_ONE]]
+MID: 668d18a7489043b38dd435933319e8
+UID: ABC-123
+LEVEL: None
+STATUS: Draft
+TAGS: one, two
+TITLE: Example composite node title
+STATEMENT: System A shall do B.
+RATIONALE: Rationale.
+COMMENT: Test comment.
+RELATIONS:
+- TYPE: Parent
+  VALUE: SDOC-SSS-88
+  ROLE: Refines
+- TYPE: Parent
+  VALUE: SDOC-SSS-58
+  FUNCTION: Foo.hello_world_2
+
+[NODE_NAME_TWO]
+UID: QWE-6789
+TITLE: Example non-composite node title
+VERIFICATION: Review, Test
+FIELD_ONE: A
+FIELD_TWO: B, C
+
+[[/NODE_NAME_ONE]]
+
+[SOME_EXAMPLE_NODE]
+STATEMENT: >>>
+MathJax in requirement's STATEMENT:
+
+.. raw:: latex html
+
+    $$
+    \mathbf{\underline{k}}_{\text{a}} =
+    \mathbf{\underline{i}}_{\text{a}} \times
+    \mathbf{\underline{j}}_{\text{a}}
+    $$
+<<<
+
+[DOCUMENT_FROM_FILE]
+FILE: ddd/ddd/ddd\f456inc-_lude.ssec
+INCLUDE_TITLE: True
