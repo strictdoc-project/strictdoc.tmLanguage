@@ -1,0 +1,7 @@
+[DOCUMENT]
+TITLE: Document with composite SECTION
+
+[[SECTION]]
+TITLE: Valid section
+
+[[/SECTION]]

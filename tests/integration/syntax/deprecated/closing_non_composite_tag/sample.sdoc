@@ -1,0 +1,7 @@
+[DOCUMENT]
+TITLE: Document
+
+[COMPOSITE_REQUIREMENT]
+STATEMENT: This tag name is possible, but will not create a composite node.
+
+[/COMPOSITE_REQUIREMENT]

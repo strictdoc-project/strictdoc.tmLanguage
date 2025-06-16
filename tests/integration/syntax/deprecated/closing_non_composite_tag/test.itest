@@ -1,0 +1,5 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [4:0-23] "[COMPOSITE_REQUIREMENT]" → source.sdoc keyword.sdoc
+CHECK: [5:11-74] "This tag name is possible, but will not create a composite node" → source.sdoc string.unquoted
+CHECK: [7:0-24] "[/COMPOSITE_REQUIREMENT]" → source.sdoc invalid.illegal.sdoc

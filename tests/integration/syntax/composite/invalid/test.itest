@@ -1,0 +1,19 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [1:0-10] "[DOCUMENT]" → source.sdoc keyword.sdoc
+CHECK: [2:0-5] "TITLE" → source.sdoc keyword.control.sdoc keyword.control.sdoc
+CHECK: [2:5-7] ": " → source.sdoc keyword.control.sdoc
+CHECK: [2:7-38] "Document with invalid examples" → source.sdoc keyword.control.sdoc string.sdoc
+CHECK: [3:0-1] "" → source.sdoc
+CHECK: [4:0-12] "[[DOCUMENT]]" → source.sdoc invalid.illegal.sdoc
+CHECK: [5:0-1] "" → source.sdoc
+CHECK: [6:0-13] "[[/DOCUMENT]]" → source.sdoc invalid.illegal.sdoc
+CHECK: [7:0-1] "" → source.sdoc
+CHECK: [8:0-11] "[[GRAMMAR]]" → source.sdoc invalid.illegal.sdoc
+CHECK: [9:0-1] "" → source.sdoc
+CHECK: [10:0-12] "[[/GRAMMAR]]" → source.sdoc invalid.illegal.sdoc
+CHECK: [11:0-1] "" → source.sdoc
+CHECK: [12:0-22] "[[DOCUMENT_FROM_FILE]]" → source.sdoc invalid.illegal.sdoc
+CHECK: [13:0-1] "" → source.sdoc
+CHECK: [14:0-23] "[[/DOCUMENT_FROM_FILE]]" → source.sdoc invalid.illegal.sdoc
+CHECK: [15:0-1] "" → source.sdoc

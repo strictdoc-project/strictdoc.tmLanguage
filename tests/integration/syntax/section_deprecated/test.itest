@@ -1,9 +1,0 @@
-RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
-
-CHECK: [4:0-9] "[SECTION]" → source.sdoc invalid.deprecated.sdoc
-CHECK: [5:0-5] "TITLE" → source.sdoc keyword.control.sdoc keyword.control.sdoc
-CHECK: [5:5-7] ": " → source.sdoc keyword.control.sdoc
-CHECK: [5:7-21] "Wrong section" → source.sdoc keyword.control.sdoc string.sdoc
-CHECK: [6:0-1] "" → source.sdoc
-CHECK: [7:0-10] "[/SECTION]" → source.sdoc invalid.deprecated.sdoc
-CHECK: [8:0-1] "" → source.sdoc

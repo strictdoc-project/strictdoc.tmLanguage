@@ -1,0 +1,14 @@
+[DOCUMENT]
+TITLE: Document with invalid examples
+
+[[DOCUMENT]]
+
+[[/DOCUMENT]]
+
+[[GRAMMAR]]
+
+[[/GRAMMAR]]
+
+[[DOCUMENT_FROM_FILE]]
+
+[[/DOCUMENT_FROM_FILE]]
