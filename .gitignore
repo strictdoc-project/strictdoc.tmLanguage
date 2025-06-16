@@ -1,6 +1,7 @@
 .idea
 node_modules
 package-lock.json
+*.code-workspace
 *.vsix
 
 # tests/integration
