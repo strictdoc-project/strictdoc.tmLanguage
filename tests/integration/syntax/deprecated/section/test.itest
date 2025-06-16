@@ -1,0 +1,4 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [4:0-9] "[SECTION]" → source.sdoc invalid.deprecated.sdoc
+CHECK: [7:0-10] "[/SECTION]" → source.sdoc invalid.deprecated.sdoc

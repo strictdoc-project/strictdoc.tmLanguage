@@ -1,0 +1,13 @@
+[DOCUMENT]
+TITLE: Deprecated ParentReqReference, FileReference, BibReference
+
+[GRAMMAR]
+ELEMENTS:
+- TAG: DEPRECATED_TYPE_REF_CHOICES
+  FIELDS:
+  - TITLE: DEPRECATED_1
+    TYPE: ParentReqReference
+  - TITLE: DEPRECATED_2
+    TYPE: FileReference
+  - TITLE: DEPRECATED_3
+    TYPE: BibReference

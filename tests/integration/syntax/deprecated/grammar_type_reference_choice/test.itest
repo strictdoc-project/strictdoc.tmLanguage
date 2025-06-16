@@ -1,0 +1,5 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [9:10-28] "ParentReqReference" → source.sdoc invalid.deprecated
+CHECK: [11:10-23] "FileReference" → source.sdoc invalid.deprecated
+CHECK: [13:10-22] "BibReference" → source.sdoc invalid.deprecated

@@ -1,0 +1,21 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [1:0-10] "[DOCUMENT]" → source.sdoc keyword.sdoc
+CHECK: [2:0-5] "TITLE" → source.sdoc keyword.control.sdoc keyword.control.sdoc
+CHECK: [2:5-7] ": " → source.sdoc keyword.control.sdoc
+CHECK: [2:7-46] "Document with valid composite examples" → source.sdoc keyword.control.sdoc string.sdoc
+CHECK: [3:0-1] "" → source.sdoc
+CHECK: [4:0-11] "[[SECTION]]" → source.sdoc keyword.sdoc
+CHECK: [5:0-5] "TITLE" → source.sdoc keyword.control.sdoc keyword.control.sdoc
+CHECK: [5:5-7] ": " → source.sdoc keyword.control.sdoc
+CHECK: [5:7-21] "Valid section" → source.sdoc keyword.control.sdoc string.sdoc
+CHECK: [6:0-1] "" → source.sdoc
+CHECK: [7:0-12] "[[/SECTION]]" → source.sdoc keyword.sdoc
+CHECK: [8:0-1] "" → source.sdoc
+CHECK: [9:0-12] "[[ANY_NAME]]" → source.sdoc keyword.sdoc
+CHECK: [10:0-5] "TITLE" → source.sdoc keyword.control.sdoc keyword.control.sdoc
+CHECK: [10:5-7] ": " → source.sdoc keyword.control.sdoc
+CHECK: [10:7-22] "Composite node" → source.sdoc keyword.control.sdoc string.sdoc
+CHECK: [11:0-1] "" → source.sdoc
+CHECK: [12:0-13] "[[/ANY_NAME]]" → source.sdoc keyword.sdoc
+CHECK: [13:0-1] "" → source.sdoc

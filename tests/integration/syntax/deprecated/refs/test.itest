@@ -1,0 +1,3 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [6:0-6] "REFS:" → source.sdoc invalid.deprecated.sdoc

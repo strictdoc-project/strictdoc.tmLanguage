@@ -1,0 +1,12 @@
+[DOCUMENT]
+TITLE: Document with valid composite examples
+
+[[SECTION]]
+TITLE: Valid section
+
+[[/SECTION]]
+
+[[ANY_NAME]]
+TITLE: Composite node
+
+[[/ANY_NAME]]

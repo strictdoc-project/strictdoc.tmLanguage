@@ -1,0 +1,6 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [3:0-10] "REQ_PREFIX" → source.sdoc keyword.control.sdoc invalid.deprecated.sdoc
+CHECK: [4:0-8] "OPTIONS:" → source.sdoc keyword.control.sdoc
+CHECK: [5:0-20] "  REQUIREMENT_STYLE:" → source.sdoc invalid.deprecated.sdoc
+CHECK: [6:0-21] "  REQUIREMENT_IN_TOC:" → source.sdoc invalid.deprecated.sdoc
