@@ -744,5 +744,5 @@
             ]
         }
     },
-    "scopeName": "source.sdoc"
+    "scopeName": "text.strictdoc"
 }

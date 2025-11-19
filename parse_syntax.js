@@ -11,7 +11,7 @@ const vscodeOnigurumaLib = oniguruma.loadWASM(wasmBin).then(() => {
     };
 });
 
-const scopeName = "source.sdoc";
+const scopeName = "text.strictdoc";
 const grammarPath = path.join(__dirname, "syntaxes/sdoc.tmLanguage.json");
 const filePath = process.argv[2];
 if (!fs.existsSync(filePath)) {

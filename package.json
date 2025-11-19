@@ -36,7 +36,7 @@
     "grammars": [
       {
         "language": "sdoc",
-        "scopeName": "source.sdoc",
+        "scopeName": "text.strictdoc",
         "path": "./syntaxes/sdoc.tmLanguage.json"
       }
     ]
