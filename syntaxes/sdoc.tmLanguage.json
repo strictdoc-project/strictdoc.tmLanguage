@@ -718,11 +718,11 @@
         "value_rst": {
             "begin": ">>>$",
             "end": "^<<<$",
-            "contentName": "source.rst",
+            "contentName": "text.restructuredtext",
             "patterns": [
                 {
                     "comment": "FIXME: # 'The problem of leaking incorrect RST markup'. An invalid included RST markup breaks further markup of the file by exceeding the scope and eating at least one end-of-scope marker. In the file tmLanguage (plist) in the program TextMate it was possible to capture the scope with RST content more clearly, and the RST text does not leak to the limits of the scope. Using this method in this file does not work.",
-                    "include": "source.rst"
+                    "include": "text.restructuredtext"
                 }
             ],
             "captures": { "0": { "name": "string.quoted.double.sdoc" } }

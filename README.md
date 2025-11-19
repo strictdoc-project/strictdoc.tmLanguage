@@ -171,9 +171,9 @@ git clone git@github.com:strictdoc-project/strictdoc.tmLanguage.git
 
 In the cloned `strictdoc.tmLanguage` folder, there is a file called
 `syntaxes/sdoc.tmLanguage.json`. Open that file and replace all occurrences of
-`source.rst` with `lngpck.source.rst`. This is needed because TM4E language
+`text.restructuredtext` with `lngpck.text.restructuredtext`. This is needed because TM4E language
 repository maintains all its .json language files under the `lngpck.*`
-namespace. Changing to `lngpck.source.rst` helps the StrictDoc grammar to
+namespace. Changing to `lngpck.text.restructuredtext` helps the StrictDoc grammar to
 properly locate the RST grammar in Eclipse.
 
 Follow the same steps as for RST above: import the `sdoc.tmLanguage.json` file.
