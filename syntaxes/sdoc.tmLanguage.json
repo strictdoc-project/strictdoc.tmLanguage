@@ -275,6 +275,7 @@
                 { "include": "#grammar_property_prefix" },
                 { "include": "#grammar_property_view_style" },
                 { "include": "#grammar_field_title" },
+                { "include": "#grammar_field_human_title" },
                 { "include": "#grammar_field_type" },
                 { "include": "#grammar_field_required" },
                 { "include": "#grammar_relation_type" },
@@ -343,6 +344,17 @@
                     "comment": "uppercase letters, digits and single underscores",
                     "match": "(_?[A-Z0-9]*(?:_[A-Z0-9]*)?_?)$",
                     "name": "string.sdoc"
+                }
+            ]
+        },
+        "grammar_field_human_title": {
+            "patterns": [
+                {
+                    "name": "",
+                    "begin": "(^\\s\\s\\s\\sHUMAN_TITLE:)\\s",
+                    "end": "$",
+                    "beginCaptures": { "1": { "name": "keyword.control.sdoc" } },
+                    "patterns": [ { "include": "#value_singleline" } ]
                 }
             ]
         },

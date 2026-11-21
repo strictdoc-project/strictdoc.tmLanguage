@@ -1,0 +1,14 @@
+[DOCUMENT]
+TITLE: Grammar fields with HUMAN_TITLE
+
+[GRAMMAR]
+ELEMENTS:
+- TAG: REQUIREMENT
+  FIELDS:
+  - TITLE: UID
+    TYPE: String
+    REQUIRED: True
+  - TITLE: STATEMENT
+    HUMAN_TITLE: Requirement statement
+    TYPE: String
+    REQUIRED: True
