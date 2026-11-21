@@ -10,7 +10,7 @@ config: Any
 lit_config: Any
 
 config.name = "StrictDoc integration tests"
-config.test_format = lit.formats.ShTest("0")
+config.test_format = lit.formats.ShTest(execute_external=False)
 config.suffixes = [".itest"]
 
 current_dir = os.getcwd()
