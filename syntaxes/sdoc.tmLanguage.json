@@ -711,7 +711,7 @@
         },
         "node_field_general_except_specific": {
             "comment": "field names whose rules are defined before this template is included must be added to the exception",
-            "begin": "(^(?!TITLE|LEVEL|MID|UID|RELATIONS|REFS)([A-Z]+[A-Za-z0-9_\\-]*):)\\s",
+            "begin": "(^(?!(?:TITLE|LEVEL|MID|UID|RELATIONS|REFS):)([A-Z]+[A-Za-z0-9_\\-]*):)\\s",
             "end": "$",
             "patterns": [
                 { "include": "#value_rst" },
