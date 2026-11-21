@@ -1,0 +1,14 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [6:0-13] "TITLE_SHORT: " → text.strictdoc keyword.control.sdoc
+CHECK: [6:13-24] "Short title" → text.strictdoc string.unquoted
+CHECK: [7:0-15] "LEVEL_OF_RISK: " → text.strictdoc keyword.control.sdoc
+CHECK: [7:15-19] "High" → text.strictdoc string.unquoted
+CHECK: [8:0-13] "MIDDLE_NAME: " → text.strictdoc keyword.control.sdoc
+CHECK: [8:13-18] "Value" → text.strictdoc string.unquoted
+CHECK: [9:0-12] "UID_LEGACY: " → text.strictdoc keyword.control.sdoc
+CHECK: [9:12-17] "OLD-1" → text.strictdoc string.unquoted
+CHECK: [10:0-14] "RELATIONSHIP: " → text.strictdoc keyword.control.sdoc
+CHECK: [10:14-19] "Value" → text.strictdoc string.unquoted
+CHECK: [11:0-9] "REFSPEC: " → text.strictdoc keyword.control.sdoc
+CHECK: [11:9-14] "Value" → text.strictdoc string.unquoted

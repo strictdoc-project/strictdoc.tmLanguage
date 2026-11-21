@@ -1,0 +1,11 @@
+[DOCUMENT]
+TITLE: Node fields with names that start with a reserved field name
+
+[REQUIREMENT]
+UID: REQ-1
+TITLE_SHORT: Short title
+LEVEL_OF_RISK: High
+MIDDLE_NAME: Value
+UID_LEGACY: OLD-1
+RELATIONSHIP: Value
+REFSPEC: Value
