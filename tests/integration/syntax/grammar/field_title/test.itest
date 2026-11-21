@@ -1,0 +1,6 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [8:0-10] "  - TITLE:" → text.strictdoc keyword.control.sdoc
+CHECK: [8:11-32] "VERIFICATION_METHOD_X" → text.strictdoc string.sdoc
+CHECK: [11:0-10] "  - TITLE:" → text.strictdoc keyword.control.sdoc
+CHECK: [11:11-18] "Test-Id" → text.strictdoc string.sdoc

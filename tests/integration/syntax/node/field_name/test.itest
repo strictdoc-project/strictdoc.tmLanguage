@@ -1,0 +1,7 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [6:0-23] "ACCEPTANCE_CRITERIA_X: " → text.strictdoc keyword.control.sdoc
+CHECK: [6:23-40] "Single-line value" → text.strictdoc string.unquoted
+CHECK: [7:0-14] "TEST_CASE_ID: " → text.strictdoc keyword.control.sdoc
+CHECK: [10:0-9] "Test-Id: " → text.strictdoc keyword.control.sdoc
+CHECK: [10:9-61] "Value of a field with lowercase letters and a hyphen" → text.strictdoc string.unquoted

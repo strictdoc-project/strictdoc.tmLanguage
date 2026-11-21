@@ -341,8 +341,8 @@
         "grammar_field_title_pattern": {
             "patterns": [
                 {
-                    "comment": "uppercase letters, digits and single underscores",
-                    "match": "(_?[A-Z0-9]*(?:_[A-Z0-9]*)?_?)$",
+                    "comment": "StrictDoc FieldName: an uppercase letter, then letters, digits, underscores and hyphens",
+                    "match": "([A-Z]+[A-Za-z0-9_\\-]*)$",
                     "name": "string.sdoc"
                 }
             ]
@@ -692,8 +692,8 @@
             "comment": "Used to highlight fields that have not yet been filled in correctly",
             "patterns": [
                 {
-                    "comment": "uppercase letters, digits and single underscores",
-                    "match": "^(_?[A-Z0-9]*(?:_[A-Z0-9]*)?_?):\\s",
+                    "comment": "StrictDoc FieldName: an uppercase letter, then letters, digits, underscores and hyphens",
+                    "match": "^([A-Z]+[A-Za-z0-9_\\-]*):\\s",
                     "name": "keyword.other.sdoc"
                 }
             ]
@@ -711,7 +711,7 @@
         },
         "node_field_general_except_specific": {
             "comment": "field names whose rules are defined before this template is included must be added to the exception",
-            "begin": "(^(?!TITLE|LEVEL|MID|UID|RELATIONS|REFS)(_?[A-Z0-9]*(?:_[A-Z0-9]*)?_?):)\\s",
+            "begin": "(^(?!TITLE|LEVEL|MID|UID|RELATIONS|REFS)([A-Z]+[A-Za-z0-9_\\-]*):)\\s",
             "end": "$",
             "patterns": [
                 { "include": "#value_rst" },
