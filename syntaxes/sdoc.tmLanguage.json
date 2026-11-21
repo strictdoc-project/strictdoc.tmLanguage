@@ -83,7 +83,7 @@
             "patterns": [
                 {
                     "name": "",
-                    "match": "(^\\s\\sMARKUP:)\\s\\b(RST|Text|HTML)\\b$",
+                    "match": "(^\\s\\sMARKUP:)\\s\\b(RST|Text|HTML|Markdown)\\b$",
                     "captures": {
                         "1": { "name": "keyword.control.sdoc" },
                         "2": { "name": "constant.numeric.sdoc" }
