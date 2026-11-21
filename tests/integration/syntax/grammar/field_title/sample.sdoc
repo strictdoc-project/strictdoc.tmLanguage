@@ -1,0 +1,13 @@
+[DOCUMENT]
+TITLE: Grammar fields with multi-part titles
+
+[GRAMMAR]
+ELEMENTS:
+- TAG: REQUIREMENT
+  FIELDS:
+  - TITLE: VERIFICATION_METHOD_X
+    TYPE: String
+    REQUIRED: False
+  - TITLE: Test-Id
+    TYPE: String
+    REQUIRED: False

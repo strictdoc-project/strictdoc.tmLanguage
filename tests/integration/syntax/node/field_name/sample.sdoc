@@ -1,0 +1,10 @@
+[DOCUMENT]
+TITLE: Node fields with multi-part names
+
+[REQUIREMENT]
+UID: REQ-1
+ACCEPTANCE_CRITERIA_X: Single-line value
+TEST_CASE_ID: >>>
+Multiline value
+<<<
+Test-Id: Value of a field with lowercase letters and a hyphen
