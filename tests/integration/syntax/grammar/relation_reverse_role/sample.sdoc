@@ -1,0 +1,17 @@
+[DOCUMENT]
+TITLE: Grammar relations with ROLE and REVERSE_ROLE
+
+[GRAMMAR]
+ELEMENTS:
+- TAG: REQUIREMENT
+  FIELDS:
+  - TITLE: STATEMENT
+    TYPE: String
+    REQUIRED: True
+  RELATIONS:
+  - TYPE: Parent
+    ROLE: Refines
+    REVERSE_ROLE: Refined by
+  - TYPE: Child
+    ROLE: Implements
+    REVERSE_ROLE: Implemented by

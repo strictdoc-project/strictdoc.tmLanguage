@@ -402,7 +402,7 @@
             "patterns": [
                 {
                     "name": "",
-                    "begin": "(^\\s\\s\\s\\sROLE:)\\s",
+                    "begin": "(^\\s\\s\\s\\s(?:REVERSE_)?ROLE:)\\s",
                     "end": "$",
                     "beginCaptures": { "0": { "name": "keyword.control.sdoc" } },
                     "patterns": [ { "include": "#value_singleline" } ]

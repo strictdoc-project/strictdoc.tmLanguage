@@ -1,0 +1,10 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [13:0-10] "    ROLE: " → text.strictdoc keyword.control.sdoc
+CHECK: [13:10-17] "Refines" → text.strictdoc string.unquoted
+CHECK: [14:0-18] "    REVERSE_ROLE: " → text.strictdoc keyword.control.sdoc
+CHECK: [14:18-28] "Refined by" → text.strictdoc string.unquoted
+CHECK: [16:0-10] "    ROLE: " → text.strictdoc keyword.control.sdoc
+CHECK: [16:10-20] "Implements" → text.strictdoc string.unquoted
+CHECK: [17:0-18] "    REVERSE_ROLE: " → text.strictdoc keyword.control.sdoc
+CHECK: [17:18-32] "Implemented by" → text.strictdoc string.unquoted
