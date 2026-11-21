@@ -1,0 +1,7 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [11:11-20] "STATEMENT" → text.strictdoc string.sdoc
+CHECK: [12:0-16] "    HUMAN_TITLE:" → text.strictdoc keyword.control.sdoc
+CHECK: [12:16-17] " " → text.strictdoc
+CHECK: [12:17-38] "Requirement statement" → text.strictdoc string.unquoted
+CHECK: [13:0-10] "    TYPE: " → text.strictdoc keyword.control.sdoc
