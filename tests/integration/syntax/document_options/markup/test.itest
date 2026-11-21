@@ -1,0 +1,5 @@
+RUN: %parse_syntax %S/sample.sdoc | filecheck %s --dump-input=fail
+
+CHECK: [3:0-8] "OPTIONS:" → text.strictdoc keyword.control.sdoc
+CHECK: [4:0-9] "  MARKUP:" → text.strictdoc keyword.control.sdoc
+CHECK: [4:10-18] "Markdown" → text.strictdoc constant.numeric.sdoc
